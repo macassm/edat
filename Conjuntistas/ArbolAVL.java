@@ -182,6 +182,25 @@ public class ArbolAVL{
 
         return pertenece;
     }
+    
+    public Object obtener(Comparable clave) {
+        return obtenerRecursivo(this.raiz, clave);
+    }
+
+    private Object obtenerRecursivo(NodoAVL n, Comparable clave) {
+        Object resultado = null;
+        if (n != null) {
+            int comparacion = clave.compareTo(n.getElem());
+            if (comparacion == 0) {
+                resultado = n.getElem(); // ¡Lo encontramos! Devolvemos el objeto.
+            } else if (comparacion < 0) {
+                resultado = obtenerRecursivo(n.getIzquierdo(), clave);
+            } else {
+                resultado = obtenerRecursivo(n.getDerecho(), clave);
+            }
+        }
+        return resultado;
+    }
 
     public Object  minimoElem(){
         Object minimo = null;
