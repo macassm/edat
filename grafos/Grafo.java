@@ -36,20 +36,30 @@ public class Grafo {
         boolean logrado = false;
         NodoVert auxDesde = this.ubicarVertice(desde);
         NodoVert auxHasta = this.ubicarVertice(hasta);
-        
+
         if (auxDesde != null && auxHasta != null) {
-            NodoAdy actual = auxDesde.getPrimerAdy();
-            if(!existeAdyacente(actual, auxHasta)){
-                if (actual != null) {
-                NodoAdy ultimo = this.encontrarUltimoAdyacente(actual);
-                ultimo.setSigAdyacente(new NodoAdy(auxHasta, etiqueta));
-            } else {
-                auxDesde.setPrimerAdy(new NodoAdy(auxHasta, etiqueta));
-            }
-            logrado = true;
+            boolean insertadoIda = insertarAdyacente(auxDesde, auxHasta, etiqueta);
+            boolean insertadoVuelta = insertarAdyacente(auxHasta, auxDesde, etiqueta);
+            if(insertadoIda && insertadoVuelta){
+                logrado = true;
             }
         }
+
         return logrado;
+    }
+    private boolean insertarAdyacente(NodoVert origen, NodoVert destino, Object etiqueta){
+        boolean valor = false;
+        NodoAdy actual = origen.getPrimerAdy();
+        if(!existeAdyacente(actual, destino)){
+            if(actual!=null){
+                NodoAdy ultimo = encontrarUltimoAdyacente(actual);
+                ultimo.setSigAdyacente(new NodoAdy(destino, etiqueta));
+            }else{
+                origen.setPrimerAdy(new NodoAdy(destino, etiqueta));
+            }
+            valor = true;
+        }
+        return valor;
     }
     private boolean existeAdyacente(NodoAdy primero, NodoVert destino){
         boolean valor = false;
@@ -142,14 +152,35 @@ public class Grafo {
         }
     }
 
-    public boolean eliminarArco(Object etiqueta) {
-        boolean fueEliminado = false;
-        NodoVert actual = this.inicio;
-        while (!fueEliminado && actual != null) {
-            fueEliminado = eliminarArcoAux(actual, etiqueta);
-            actual = actual.getSigVertice();
+    public boolean eliminarArco(Object origen, Object destino) {
+        boolean exito = false;
+        NodoVert desde = ubicarVertice(origen);
+        NodoVert hasta = ubicarVertice(destino);
+       if(desde != null && hasta != null){
+        boolean eliminadoIda = eliminarAdyacente(hasta, desde);
+        boolean eliminadoVuelta = eliminarAdyacente(desde, hasta);
+        exito = eliminadoIda && eliminadoVuelta;
+       }
+        return exito;
+    }
+    private boolean eliminarAdyacente(NodoVert origen, NodoVert destino){
+        boolean exito = false;
+        NodoAdy actual = origen.getPrimerAdy();
+        NodoAdy anterior = null;
+        while(actual!=null && !exito){
+            if(actual.getVertice().getElem().equals(destino.getElem())){
+                if(anterior == null){
+                    origen.setPrimerAdy(actual.getSigAdyacente());
+                }else{
+                    anterior.setSigAdyacente(actual.getSigAdyacente());
+                }
+                exito = true;
+            }else{
+                anterior = actual;
+                actual = actual.getSigAdyacente();
+            }
         }
-        return fueEliminado;
+        return exito;
     }
 
     public boolean modificarArco(Object etiquetaABuscar, Object nuevoEtiqueta) {
