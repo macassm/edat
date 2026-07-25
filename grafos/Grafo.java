@@ -52,20 +52,38 @@ public class Grafo {
         return logrado;
 
     }
-
-    private NodoAdy encontrarUltimoAdyacente(NodoAdy primero, Object etiqueta) {
-        NodoAdy ultimo = null;
-        if (primero != null) {
-            ultimo = primero;
-            while (ultimo.getSigAdyacente() != null && !ultimo.getEtiqueta().equals(etiqueta)) {
-                ultimo = ultimo.getSigAdyacente();
+    private boolean existeAdyacente(NodoAdy primero, NodoVert destino){
+        boolean valor = false;
+        NodoAdy actual = primero;
+        while(actual != null && !valor){
+            if(actual.getVertice().getElem().equals(destino.getElem())){
+                valor = true;
+            }else{
+                actual = actual.getSigAdyacente();
             }
-            if (ultimo.getEtiqueta().equals(etiqueta)) {
-                ultimo = null;
-            }
+        }
+        return valor;
+    }
+    private NodoAdy encontrarUltimoAdyacente(NodoAdy primero){
+        NodoAdy ultimo = primero;
+        while(ultimo.getSigAdyacente() != null){
+            ultimo = ultimo.getSigAdyacente();
         }
         return ultimo;
     }
+    // private NodoAdy encontrarUltimoAdyacente(NodoAdy primero, Object etiqueta) {
+    //     NodoAdy ultimo = null;
+    //     if (primero != null) {
+    //         ultimo = primero;
+    //         while (ultimo.getSigAdyacente() != null && !ultimo.getEtiqueta().equals(etiqueta)) {
+    //             ultimo = ultimo.getSigAdyacente();
+    //         }
+    //         if (ultimo.getEtiqueta().equals(etiqueta)) {
+    //             ultimo = null;
+    //         }
+    //     }
+    //     return ultimo;
+    // }
 
     public boolean existeVertice(Object elem) {
         boolean existe = false;
