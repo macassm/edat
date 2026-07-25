@@ -53,7 +53,6 @@ public class ArbolAVL{
             balanceNodo.recalcularAltura();
             int balance = calcularBalance(balanceNodo);
             if(balance > 1 ){
-                System.out.println(" entra el nodo " + n.getElem()+ " a balancear por izq");
                 int balanceHijo = calcularBalance(balanceNodo.getIzquierdo());
                 if(balanceHijo < 0){
                     balanceNodo.setIzquierdo(balancearDer(balanceNodo.getIzquierdo()));
@@ -61,7 +60,6 @@ public class ArbolAVL{
                 balanceNodo = balancearIzq(balanceNodo);
             }
             if(balance < -1){
-                System.out.println(" entra el nodo " + n.getElem()+ " a balancear por der");
                 int balanceHijo = calcularBalance(balanceNodo.getDerecho());
                 if(balanceHijo > 0){
                     balanceNodo.setDerecho(balancearIzq(balanceNodo.getDerecho()));

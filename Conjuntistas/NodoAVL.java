@@ -13,8 +13,10 @@ private int altura;
         this.altura = 0;
     }
 
-    public void recalcularAltura(){
-
+public void recalcularAltura() {
+        int altIzq = (this.izquierdo != null) ? this.izquierdo.getAltura() : -1;
+        int altDer = (this.derecho != null) ? this.derecho.getAltura() : -1;
+        this.altura = Math.max(altIzq, altDer) + 1;
     }
 
     public int getAltura(){
