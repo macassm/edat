@@ -1,4 +1,4 @@
-package estructuras.tpFinal;
+package TPFinal;
 
 public class Desafio implements Comparable<Desafio>{
     

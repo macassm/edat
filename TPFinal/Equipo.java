@@ -1,4 +1,4 @@
-package estructuras.tpFinal;
+package TPFinal;
 
 public class Equipo {
 
