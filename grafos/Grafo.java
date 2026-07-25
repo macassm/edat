@@ -36,21 +36,20 @@ public class Grafo {
         boolean logrado = false;
         NodoVert auxDesde = this.ubicarVertice(desde);
         NodoVert auxHasta = this.ubicarVertice(hasta);
-
+        
         if (auxDesde != null && auxHasta != null) {
-            if (auxDesde.getPrimerAdy() != null) {
-                NodoAdy ultimo = this.encontrarUltimoAdyacente(auxDesde.getPrimerAdy(), etiqueta);
-                if (ultimo != null) {
-                    ultimo.setSigAdyacente(new NodoAdy(auxHasta, etiqueta));
-                    logrado = true;
-                }
+            NodoAdy actual = auxDesde.getPrimerAdy();
+            if(!existeAdyacente(actual, auxHasta)){
+                if (actual != null) {
+                NodoAdy ultimo = this.encontrarUltimoAdyacente(actual);
+                ultimo.setSigAdyacente(new NodoAdy(auxHasta, etiqueta));
             } else {
                 auxDesde.setPrimerAdy(new NodoAdy(auxHasta, etiqueta));
-                logrado = true;
+            }
+            logrado = true;
             }
         }
         return logrado;
-
     }
     private boolean existeAdyacente(NodoAdy primero, NodoVert destino){
         boolean valor = false;
@@ -71,19 +70,6 @@ public class Grafo {
         }
         return ultimo;
     }
-    // private NodoAdy encontrarUltimoAdyacente(NodoAdy primero, Object etiqueta) {
-    //     NodoAdy ultimo = null;
-    //     if (primero != null) {
-    //         ultimo = primero;
-    //         while (ultimo.getSigAdyacente() != null && !ultimo.getEtiqueta().equals(etiqueta)) {
-    //             ultimo = ultimo.getSigAdyacente();
-    //         }
-    //         if (ultimo.getEtiqueta().equals(etiqueta)) {
-    //             ultimo = null;
-    //         }
-    //     }
-    //     return ultimo;
-    // }
 
     public boolean existeVertice(Object elem) {
         boolean existe = false;
