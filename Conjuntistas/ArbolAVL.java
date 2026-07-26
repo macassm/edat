@@ -192,7 +192,7 @@ public class ArbolAVL{
         if (n != null) {
             int comparacion = clave.compareTo(n.getElem());
             if (comparacion == 0) {
-                resultado = n.getElem(); // ¡Lo encontramos! Devolvemos el objeto.
+                resultado = n.getElem(); //
             } else if (comparacion < 0) {
                 resultado = obtenerRecursivo(n.getIzquierdo(), clave);
             } else {
