@@ -212,6 +212,35 @@ public class Grafo {
         return exito;
     }
 
+    public boolean esPosibleLlegar(Object hab1, Object hab2, int valor){
+        boolean exito = false;
+        NodoVert desde = ubicarVertice(hab1);
+        NodoVert hasta = ubicarVertice(hab2);
+        if (desde != null && hasta != null) {
+        exito = esPosibleLlegarAux(desde, hab2, valor, new Lista());
+        }
+        return exito;
+    }
+
+    private boolean esPosibleLlegarAux(NodoVert actual, Object destino, int valor, Lista visitados) {
+    boolean encontrado = false;
+    if (actual != null && !pertenece(visitados, actual.getElem())) {
+        if (actual.getElem().equals(destino)) {
+            encontrado = true;
+        } else {
+            visitados.insertar(actual.getElem(), visitados.longitud() + 1);
+            NodoAdy nodo = actual.getPrimerAdy();
+            while (nodo != null && !encontrado) {
+                if((int)nodo.getEtiqueta() <= valor){
+                    encontrado = esPosibleLlegarAux(nodo.getVertice(), destino, valor, visitados);
+                }
+                nodo = nodo.getSigAdyacente();
+            }
+        }
+    }
+    return encontrado;
+    }
+
     public boolean existeCamino(Object origen, Object destino) {
         NodoVert vertOrigen = ubicarVertice(origen);
         NodoVert vertDestino = ubicarVertice(destino);
@@ -442,7 +471,6 @@ public class Grafo {
         }
 
         return string;
-
     }
 
 public Lista caminoMasCortoPorEtiquetaMinima(Object desde, Object hasta) {
