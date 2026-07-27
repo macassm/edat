@@ -241,6 +241,47 @@ public class Grafo {
     return encontrado;
     }
 
+    public Lista minimoPuntaje(Object origen, Object destino, int[] puntajeMinimo) {
+        NodoVert desde = ubicarVertice(origen);
+        NodoVert hasta = ubicarVertice(destino);
+        Lista mejorCamino = new Lista();
+        puntajeMinimo[0] = -1;
+        int costoActual = 0;
+        if(desde != null && hasta != null){
+            Lista visitados = new Lista();
+            minimoPuntajeAux(desde, destino, visitados, mejorCamino, puntajeMinimo, costoActual);
+        }
+    
+    return mejorCamino;
+    }
+
+
+    private void minimoPuntajeAux(NodoVert actual, Object destino, Lista visitados, Lista mejorCamino, int[] puntajeMinimo, int costoActual) {
+            if(actual != null && !pertenece(visitados, actual.getElem())){
+                visitados.insertar(actual.getElem(), visitados.longitud()+1);
+                if(actual.getElem().equals(destino)){
+                    if(puntajeMinimo[0] == -1){
+                        puntajeMinimo[0] = costoActual;
+                        copiarLista(visitados,mejorCamino);
+                    }else{
+                        if(costoActual < puntajeMinimo[0]){
+                            puntajeMinimo[0] = costoActual;
+                            copiarLista(visitados, mejorCamino);
+                        }
+                    }
+                }else{
+                    NodoAdy siguiente = actual.getPrimerAdy();
+                    while(siguiente != null){
+                        if(!pertenece(visitados, siguiente.getVertice().getElem())){
+                            if((int)siguiente.getEtiqueta()<costoActual){
+                                costoActual = (int)siguiente.getEtiqueta();
+                            }
+                        }
+                    }
+                }
+            }
+    }
+
     public boolean existeCamino(Object origen, Object destino) {
         NodoVert vertOrigen = ubicarVertice(origen);
         NodoVert vertDestino = ubicarVertice(destino);
@@ -339,7 +380,7 @@ public class Grafo {
             NodoAdy ady = actual.getPrimerAdy();
             while (ady != null) {
                 if (!pertenece(visitados, ady.getVertice().getElem())) {
-                    // PODA: Solo profundiza si el camino actual aún puede ser más corto que el mejor hallado
+                    // PODA: Solo profundiza si el camino actual aun puede ser mas corto que el mejor hallado
                     if (mejorCaminoLong[0] == 0 || visitadosLong < mejorCaminoLong[0]) {
                         caminoMasCortoAux(ady.getVertice(), destino, visitados, mejorCamino, visitadosLong, mejorCaminoLong);
                     }
