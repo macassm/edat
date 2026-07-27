@@ -257,8 +257,12 @@ public class Grafo {
 
 
     private void minimoPuntajeAux(NodoVert actual, Object destino, Lista visitados, Lista mejorCamino, int[] puntajeMinimo, int costoActual) {
+            //Verifico que el nodo vertice actual sea distinto de null y que no me este parando en una habitacion que ya visite
             if(actual != null && !pertenece(visitados, actual.getElem())){
+                //Agrego la habitacion actual a visitados
                 visitados.insertar(actual.getElem(), visitados.longitud()+1);
+                //Verifico si estoy en el destino, si me encuentro en el destino verifico si es el primer camino que encontre
+                //Guardo el costoActual en puntaje minimo y copio la lista en mejorCamino
                 if(actual.getElem().equals(destino)){
                     if(puntajeMinimo[0] == -1){
                         puntajeMinimo[0] = costoActual;
@@ -270,16 +274,22 @@ public class Grafo {
                         }
                     }
                 }else{
+                    //Tomo el primer adyacente del nodo en el que estoy parado para pasar a las siguientes habitaciones
                     NodoAdy siguiente = actual.getPrimerAdy();
                     while(siguiente != null){
+                        //Verifico que la habitacion que voy a visitar no este en la lista visitados
                         if(!pertenece(visitados, siguiente.getVertice().getElem())){
-                            if((int)siguiente.getEtiqueta()<costoActual){
-                                costoActual = (int)siguiente.getEtiqueta();
-                            }
+                            //En nuevoCosto guardo el maximo entre el costoActual y el costo de pasar a la siguiente habitacion, luego lo paso como costoActual
+                            int nuevoCosto = Math.max(costoActual, (int) siguiente.getEtiqueta());
+                            //Llamado recursivo con la siguiente habitacion
+                            minimoPuntajeAux(siguiente.getVertice(), destino, visitados, mejorCamino, puntajeMinimo, nuevoCosto);
                         }
+                        siguiente = siguiente.getSigAdyacente();
                     }
                 }
             }
+            //Vacio la lista de visitados una vez que termina un camino
+            visitados.eliminar(visitados.longitud());
     }
 
     public boolean existeCamino(Object origen, Object destino) {
