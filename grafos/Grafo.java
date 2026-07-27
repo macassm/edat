@@ -184,19 +184,30 @@ public class Grafo {
         return exito;
     }
 
-    public boolean modificarArco(Object etiquetaABuscar, Object nuevoEtiqueta) {
+    public boolean modificarArco(Object origen, Object destino, Object etiquetaNueva){
         boolean exito = false;
-        NodoVert actual = this.inicio;
-        while (actual != null && !exito) {
-            NodoAdy adyacente = actual.getPrimerAdy();
-            while (adyacente != null && !exito) {
-                if (adyacente.getEtiqueta().equals(etiquetaABuscar)) {
-                    adyacente.setEtiqueta(nuevoEtiqueta);
-                    exito = true;
-                }
-                adyacente = adyacente.getSigAdyacente();
+        NodoVert desde = ubicarVertice(origen);
+        NodoVert hasta = ubicarVertice(destino);
+
+        if(desde != null && hasta != null){
+            boolean modificarIda = modificarAdyacente(desde, hasta, etiquetaNueva);
+            boolean modificarVuelta = modificarAdyacente(hasta, desde, etiquetaNueva);
+            exito = modificarIda && modificarVuelta;
+        }
+        
+        
+        return exito;
+    }
+    private boolean modificarAdyacente(NodoVert origen, NodoVert destino, Object nuevaEtiqueta){
+        boolean exito = false;
+        NodoAdy actual = origen.getPrimerAdy();
+        while(actual != null && !exito){
+            if(actual.getVertice().getElem().equals(destino.getElem())){
+                actual.setEtiqueta(nuevaEtiqueta);
+                exito = true;
+            }else{
+                actual = actual.getSigAdyacente();
             }
-            actual = actual.getSigVertice();
         }
         return exito;
     }
