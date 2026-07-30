@@ -8,25 +8,41 @@ public class EscapeHouse {
     private Grafo planoCasa;
     private ArbolAVL tablaHabitaciones;
     private ArbolAVL tablaDesafios;
-    private HashMap tablaEquipos;
-    private HashMap desafiosResueltosPorEquipo;
+    private HashMap<String, Equipo> tablaEquipos;
+    private HashMap<String, Lista> desafiosResueltosPorEquipo;
+
+    //variables que guardan cuál es la entrada y salida de la casa.
+    private int idHabitacionEntrada = -1;
+    private int idHabitacionSalida = -1;
 
     public EscapeHouse(){
         this.planoCasa = new Grafo();
-        this.tablaHabitaciones = new ArbolAVL();
-        this.tablaDesafios = new ArbolAVL();
-        this.tablaEquipos = new HashMap<>();
+        this.tablaHabitaciones = new ArbolAVL(); //clave: int codigo
+        this.tablaDesafios = new ArbolAVL(); //clave: int puntaje
+        this.tablaEquipos = new HashMap<>(); //clave: String nombre
         this.desafiosResueltosPorEquipo = new HashMap<>();
     }
      
     //Modificaciones
     public boolean insertarHabitacion(Habitacion h){
         boolean valido = false;
+        if (!tablaHabitaciones.pertenece(h.getCodigo())){
+            //guardamos la habitación en la tabla de habitaciones para guardar los datos
+            tablaHabitaciones.insertar(h);
+            //guardamos la clave de la habitación en el plano de la casa
+            planoCasa.insertarVertice(h.getCodigo());
+            valido = true;
+        }
         return valido;
     }
 
-    public boolean eliminarHabitacion(Habitacion h){
+    public boolean eliminarHabitacion(int codigoHabitacion){
         boolean valido = false;
+        if (codigoHabitacion != this.idHabitacionEntrada && codigoHabitacion != this.idHabitacionSalida && tablaHabitaciones.pertenece(codigoHabitacion)){
+            tablaHabitaciones.eliminar(codigoHabitacion); //se elimina la habitación de la base de datos
+            planoCasa.eliminarVertice(codigoHabitacion); //se elimina la habitacion de la casa con sus puertas
+            valido = true;
+        }
         return valido;
     }
 

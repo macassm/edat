@@ -212,14 +212,14 @@ public class Grafo {
         return exito;
     }
 
-public boolean esPosibleLlegar(Object hab1, Object hab2, int maxPuntos){
+public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
         boolean exito = false;
-        NodoVert desde = ubicarVertice(hab1);
-        NodoVert hasta = ubicarVertice(hab2);
+        NodoVert desde = ubicarVertice(vertice1);
+        NodoVert hasta = ubicarVertice(vertice2);
         
         if (desde != null && hasta != null) {
             // Pasamos 0 como costo acumulado inicial, y 0 como longitud de la lista
-            exito = esPosibleLlegarAux(desde, hab2, 0, maxPuntos, new Lista(), 0);
+            exito = esPosibleLlegarAux(desde, vertice2, 0, maxPuntos, new Lista(), 0);
         }
         return exito;
     }
