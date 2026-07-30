@@ -212,33 +212,40 @@ public class Grafo {
         return exito;
     }
 
-    public boolean esPosibleLlegar(Object hab1, Object hab2, int valor){
+public boolean esPosibleLlegar(Object hab1, Object hab2, int maxPuntos){
         boolean exito = false;
         NodoVert desde = ubicarVertice(hab1);
         NodoVert hasta = ubicarVertice(hab2);
+        
         if (desde != null && hasta != null) {
-        exito = esPosibleLlegarAux(desde, hab2, valor, new Lista());
+            // Pasamos 0 como costo acumulado inicial, y 0 como longitud de la lista
+            exito = esPosibleLlegarAux(desde, hab2, 0, maxPuntos, new Lista(), 0);
         }
         return exito;
     }
 
-    private boolean esPosibleLlegarAux(NodoVert actual, Object destino, int valor, Lista visitados) {
-    boolean encontrado = false;
-    if (actual != null && !pertenece(visitados, actual.getElem())) {
+    private boolean esPosibleLlegarAux(NodoVert actual, Object destino, int costoAcum, int maxPuntos, Lista visitados, int visitadosLong) {
+        boolean encontrado = false;
+        visitadosLong++;
+        visitados.insertar(actual.getElem(), visitadosLong);
+
         if (actual.getElem().equals(destino)) {
             encontrado = true;
         } else {
-            visitados.insertar(actual.getElem(), visitados.longitud() + 1);
             NodoAdy nodo = actual.getPrimerAdy();
             while (nodo != null && !encontrado) {
-                if((int)nodo.getEtiqueta() <= valor){
-                    encontrado = esPosibleLlegarAux(nodo.getVertice(), destino, valor, visitados);
+                int pesoArco = (int) nodo.getEtiqueta();
+                
+                // Solo avanza si no lo visitó Y si sumar esta puerta NO supera el límite total
+                if (!pertenece(visitados, nodo.getVertice().getElem()) && (costoAcum + pesoArco <= maxPuntos)) {
+                    encontrado = esPosibleLlegarAux(nodo.getVertice(), destino, costoAcum + pesoArco, maxPuntos, visitados, visitadosLong);
                 }
                 nodo = nodo.getSigAdyacente();
             }
         }
-    }
-    return encontrado;
+        
+        visitados.eliminar(visitadosLong);
+        return encontrado;
     }
 
     public Lista minimoPuntaje(Object origen, Object destino, int[] puntajeMinimo) {
@@ -253,6 +260,46 @@ public class Grafo {
         }
     
     return mejorCamino;
+    }
+
+    public Lista caminosSinPasarPor(Object origen, Object destino, Object aEvitar, int maxCosto) {
+        Lista caminos = new Lista();
+        NodoVert vertOrigen = ubicarVertice(origen);
+        NodoVert vertDestino = ubicarVertice(destino);
+
+        // Si el origen o el destino son justo la habitación prohibida, no buscamos
+        if (vertOrigen != null && vertDestino != null && !origen.equals(aEvitar) && !destino.equals(aEvitar)) {
+            Lista caminoActual = new Lista();
+            caminosSinPasarPorAux(vertOrigen, destino, aEvitar, maxCosto, 0, caminoActual, 0, caminos);
+        }
+        return caminos;
+    }
+
+    private void caminosSinPasarPorAux(NodoVert actual, Object destino, Object aEvitar, int maxCosto, int costoAcum, Lista caminoActual, int caminoLong, Lista caminos) {
+        caminoLong++;
+        caminoActual.insertar(actual.getElem(), caminoLong);
+
+        if (actual.getElem().equals(destino)) {
+            // Como buscamos TODOS los caminos, guardamos una copia y dejamos que la recursión siga buscando
+            caminos.insertar(copiarLista(caminoActual), caminos.longitud() + 1);
+        } else {
+            NodoAdy ady = actual.getPrimerAdy();
+            while (ady != null) {
+                NodoVert vecino = ady.getVertice();
+                int pesoArco = (int) ady.getEtiqueta();
+
+                // Ignora si es el nodo prohibido, si ya fue visitado o si supera el costo
+                if (!vecino.getElem().equals(aEvitar) && 
+                    !pertenece(caminoActual, vecino.getElem()) && 
+                    (costoAcum + pesoArco <= maxCosto)) {
+                    
+                    caminosSinPasarPorAux(vecino, destino, aEvitar, maxCosto, costoAcum + pesoArco, caminoActual, caminoLong, caminos);
+                }
+                ady = ady.getSigAdyacente();
+            }
+        }
+        
+        caminoActual.eliminar(caminoLong);
     }
 
 
@@ -379,7 +426,7 @@ public class Grafo {
 
     private void caminoMasCortoAux(NodoVert actual, Object destino, Lista visitados, Lista mejorCamino, int visitadosLong, int[] mejorCaminoLong) {
         visitadosLong++;
-        visitados.insertar(actual.getElem(), visitadosLong + 1);
+        visitados.insertar(actual.getElem(), visitadosLong);
 
         if (actual.getElem().equals(destino)) {
             if (mejorCaminoLong[0] == 0 || visitadosLong < mejorCaminoLong[0]) {
