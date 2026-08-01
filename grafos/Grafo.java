@@ -515,25 +515,24 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
         return logrado;
     }
 
-    public boolean existeArco(Object desde, Object hasta) {
+public boolean existeArco(Object desde, Object hasta) {
         boolean existe = false;
-        if (this.inicio != null) {
-            NodoVert aux = this.inicio;
-            while (aux != null && !existe) {
-                if (aux.getElem().equals(desde)) {
+        NodoVert vertOrigen = ubicarVertice(desde); 
+        
+        if (vertOrigen != null) {
+            // Buscamos en los adyacentes de origen
+            NodoAdy ady = vertOrigen.getPrimerAdy();
+            while (ady != null && !existe) {
+                if (ady.getVertice().getElem().equals(hasta)) {
                     existe = true;
-                } else {
-                    aux = aux.getSigVertice();
                 }
-            }
-            if (existe) {
-                existe = recorrerArcosAux(aux, hasta);
+                ady = ady.getSigAdyacente();
             }
         }
         return existe;
     }
 
-    private boolean recorrerArcosAux(NodoVert vertice, Object buscado) {
+/*     private boolean recorrerArcosAux(NodoVert vertice, Object buscado) {
         boolean encontrado = false;
         if (vertice != null) {
             NodoAdy aux = vertice.getPrimerAdy();
@@ -546,7 +545,7 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
         }
         return encontrado;
     }
-
+*/
     public boolean vacio() {
         return inicio == null;
     }

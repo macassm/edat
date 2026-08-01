@@ -48,7 +48,23 @@ public class EscapeHouse {
 
     public boolean insertarPuerta(int habOrigen, int habDestino, int puntajeExigido){
         boolean valido = false;
+        if (puntajeExigido > 0 && !planoCasa.existeArco(habOrigen, habDestino) && tablaHabitaciones.pertenece(habOrigen) && tablaHabitaciones.pertenece(habDestino)){
+            //se agrega en ambos sentidos la puerta
+            planoCasa.insertarArco(habOrigen, habDestino, puntajeExigido);
+            planoCasa.insertarArco(habDestino, habOrigen, puntajeExigido);
+            valido = true;
+        }
         return valido;
+    }
+
+    public boolean eliminarPuerta(int habOrigen, int habDestino){
+        boolean exito = false;
+        if(planoCasa.existeArco(habOrigen, habDestino)){
+            planoCasa.eliminarArco(habOrigen, habDestino);
+            planoCasa.eliminarArco(habDestino, habOrigen);
+            exito = true;
+        }
+        return exito;
     }
 
     public boolean modificarHabitacion(String nuevoNombre, int nuevaPlanta, double nuevoTamañoMtsCuadrados,){
