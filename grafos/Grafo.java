@@ -212,8 +212,8 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
                 int pesoArco = nodo.getEtiqueta();
                 
                 // Solo avanza si no lo visitó Y si sumar esta puerta NO supera el límite total
-                if (!pertenece(visitados, nodo.getVertice().getElem()) && (costoAcum + pesoArco <= maxPuntos)) {
-                    encontrado = esPosibleLlegarAux(nodo.getVertice(), destino, costoAcum + pesoArco, maxPuntos, visitados, visitadosLong);
+                if (!pertenece(visitados, nodo.getVertice().getElem()) && (Math.max(costoAcum,pesoArco) <= maxPuntos)) {
+                    encontrado = esPosibleLlegarAux(nodo.getVertice(), destino, Math.max(costoAcum,pesoArco), maxPuntos, visitados, visitadosLong);
                 }
                 nodo = nodo.getSigAdyacente();
             }
@@ -303,9 +303,9 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
                 // Ignora si es el nodo prohibido, si ya fue visitado o si supera el costo
                 if (!vecino.getElem().equals(aEvitar) && 
                     !pertenece(caminoActual, vecino.getElem()) && 
-                    (costoAcum + pesoArco <= maxCosto)) {
+                    (Math.max(costoAcum,pesoArco) <= maxCosto)) {
                     
-                    caminosSinPasarPorAux(vecino, destino, aEvitar, maxCosto, costoAcum + pesoArco, caminoActual, caminoLong, caminos);
+                    caminosSinPasarPorAux(vecino, destino, aEvitar, maxCosto, Math.max(costoAcum,pesoArco), caminoActual, caminoLong, caminos);
                 }
                 ady = ady.getSigAdyacente();
             }
@@ -567,10 +567,10 @@ public boolean existeArco(Object desde, Object hasta) {
                 NodoVert vecino = ady.getVertice();
                 int pesoArco = ady.getEtiqueta();
 
-                if (!pertenece(visitados, vecino.getElem()) && (puntajeAcumulado + pesoArco < minPuntaje[0])) {
+                if (!pertenece(visitados, vecino.getElem()) && (Math.max(puntajeAcumulado, pesoArco) < minPuntaje[0])) {
                     // En la llamada recursiva, mandamos longVisitados + 1. 
                     // Cuando esta llamada termine (backtrack), nuestra variable local longVisitados seguirá intacta.
-                    caminoEtiquetaMinimaAux(vecino, destino, visitados, mejorCamino, puntajeAcumulado + pesoArco, minPuntaje, longVisitados + 1);
+                    caminoEtiquetaMinimaAux(vecino, destino, visitados, mejorCamino, Math.max(puntajeAcumulado, pesoArco), minPuntaje, longVisitados + 1);
                 }
                 ady = ady.getSigAdyacente();
             }
