@@ -472,26 +472,6 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
         return visitados;
     }
 
-    private boolean eliminarArcoAux(NodoVert nodo, int etiqueta) {
-        boolean logrado = false;
-        if (nodo != null) {
-            NodoAdy arcoActual = nodo.getPrimerAdy();
-            NodoAdy arcoAnterior = nodo.getPrimerAdy();
-            while (arcoActual != null && !logrado) {
-                if (arcoActual.getEtiqueta() == etiqueta  && arcoActual == nodo.getPrimerAdy()) {
-                    nodo.setPrimerAdy(arcoActual.getSigAdyacente());
-                    logrado = true;
-                } else if (arcoActual.getEtiqueta() == etiqueta && arcoActual != nodo.getPrimerAdy()) {
-                    arcoAnterior.setSigAdyacente(arcoActual.getSigAdyacente());
-                    ;
-                    logrado = true;
-                }
-                arcoAnterior = arcoActual;
-                arcoActual = arcoActual.getSigAdyacente();
-            }
-        }
-        return logrado;
-    }
 
 public boolean existeArco(Object desde, Object hasta) {
         boolean existe = false;
