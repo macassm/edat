@@ -32,7 +32,7 @@ public class Grafo {
         return aux;
     }
 
-    public boolean insertarArco(Object desde, Object hasta, Object etiqueta) {
+    public boolean insertarArco(Object desde, Object hasta, int etiqueta) {
         boolean logrado = false;
         NodoVert auxDesde = this.ubicarVertice(desde);
         NodoVert auxHasta = this.ubicarVertice(hasta);
@@ -47,7 +47,7 @@ public class Grafo {
 
         return logrado;
     }
-    private boolean insertarAdyacente(NodoVert origen, NodoVert destino, Object etiqueta){
+    private boolean insertarAdyacente(NodoVert origen, NodoVert destino, int etiqueta){
         boolean valor = false;
         NodoAdy actual = origen.getPrimerAdy();
         if(!existeAdyacente(actual, destino)){
@@ -98,7 +98,68 @@ public class Grafo {
         return existe;
     }
 
-    public boolean eliminarVertice(Object buscado) {
+public boolean eliminarVertice(Object buscado) {
+        boolean exito = false;
+        if (this.inicio != null) {
+            //  Revisamos si el vértice a borrar es el primero de la lista
+            if (this.inicio.getElem().equals(buscado)) {
+
+                eliminarArcosHaciaVertice(this.inicio); // Borra los arcos
+                this.inicio = this.inicio.getSigVertice(); // Lo desengancha
+                exito = true;
+            } else {
+                NodoVert aux = this.inicio;
+                while (aux.getSigVertice() != null && !exito) {
+                    if (aux.getSigVertice().getElem().equals(buscado)) {
+                        NodoVert aBorrar = aux.getSigVertice();
+                        eliminarArcosHaciaVertice(aBorrar); // Borra los arcos de vuelta
+                        aux.setSigVertice(aBorrar.getSigVertice()); // Lo desengancha del grafo y se pierde su información
+                        exito = true;
+                    } else {
+                        aux = aux.getSigVertice();
+                    }
+                }
+            }
+        }
+        return exito;
+    }
+
+    private void eliminarArcosHaciaVertice(NodoVert verticeABorrar) {
+        // Nos paramos alrededor del nodo que queremos borrar
+        NodoAdy ady = verticeABorrar.getPrimerAdy();
+        Object buscado = verticeABorrar.getElem();
+        
+        // Por cada nodo alrededor, vamos a él y borramos el arco que vuelve
+        while (ady != null) {
+            NodoVert vecino = ady.getVertice();
+            eliminarArcoUnidireccional(vecino, buscado);
+            ady = ady.getSigAdyacente();
+        }
+    }
+
+    private void eliminarArcoUnidireccional(NodoVert origen, Object destinoBuscado) {
+        boolean eliminado = false;
+        if (origen != null && origen.getPrimerAdy() != null) {
+            //revisamos si es el primer adyacente el que había que borrar, sino buscamos los siguientes
+            if (origen.getPrimerAdy().getVertice().getElem().equals(destinoBuscado)) {
+                origen.setPrimerAdy(origen.getPrimerAdy().getSigAdyacente());
+            } else {
+                NodoAdy auxAdy = origen.getPrimerAdy();
+                //Como no era el primer adyacente el buscado, mientras haya otros adyacentes y no hayamos eliminado el deseado
+                while (auxAdy.getSigAdyacente() != null && !eliminado) {
+                    //preguntamos si el siguiente es el buscaddo y lo borramos, sino pasamos al siguiente
+                    if (auxAdy.getSigAdyacente().getVertice().getElem().equals(destinoBuscado)) {
+                        auxAdy.setSigAdyacente(auxAdy.getSigAdyacente().getSigAdyacente());
+                        eliminado = true;
+                    } else{
+                        auxAdy = auxAdy.getSigAdyacente();
+                    }
+                }
+            }
+        }
+    }
+
+    /*public boolean eliminarVertice(Object buscado) {
         boolean exito = false;
         if (inicio != null) {
             if (inicio.getElem().equals(buscado)) {
@@ -182,9 +243,9 @@ public class Grafo {
             }
         }
         return exito;
-    }
+    }*/
 
-    public boolean modificarArco(Object origen, Object destino, Object etiquetaNueva){
+    public boolean modificarArco(Object origen, Object destino, int etiquetaNueva){
         boolean exito = false;
         NodoVert desde = ubicarVertice(origen);
         NodoVert hasta = ubicarVertice(destino);
@@ -198,7 +259,7 @@ public class Grafo {
         
         return exito;
     }
-    private boolean modificarAdyacente(NodoVert origen, NodoVert destino, Object nuevaEtiqueta){
+    private boolean modificarAdyacente(NodoVert origen, NodoVert destino, int nuevaEtiqueta){
         boolean exito = false;
         NodoAdy actual = origen.getPrimerAdy();
         while(actual != null && !exito){
@@ -251,17 +312,54 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
     public Lista minimoPuntaje(Object origen, Object destino, int[] puntajeMinimo) {
         NodoVert desde = ubicarVertice(origen);
         NodoVert hasta = ubicarVertice(destino);
-        Lista mejorCamino = new Lista();
+
+        //creamos un arreglo para mantener el valor de la Lista a través de llamadas recursivas
+        Lista[] mejorCamino = new Lista[1];
+        mejorCamino[0] = new Lista();
+
         puntajeMinimo[0] = -1;
-        int costoActual = 0;
+
         if(desde != null && hasta != null){
             Lista visitados = new Lista();
-            minimoPuntajeAux(desde, destino, visitados, mejorCamino, puntajeMinimo, costoActual);
+            minimoPuntajeAux(desde, destino, visitados, 0 , mejorCamino, puntajeMinimo, 0);
         }
     
-    return mejorCamino;
+    return mejorCamino[0];
     }
-
+    
+    private void minimoPuntajeAux(NodoVert actual, Object destino, Lista visitados, int cantVisitados, Lista[] mejorCamino, int[] puntajeMinimo, int costoActual) {
+            //Verifico que el nodo vertice actual sea distinto de null y que no me este parando en una habitacion que ya visite
+            if(actual != null && !pertenece(visitados, actual.getElem())){
+                //Agrego la habitacion actual a visitados
+                cantVisitados++;
+                visitados.insertar(actual.getElem(), cantVisitados);
+                //Verifico si estoy en el destino, si me encuentro en el destino verifico si es el primer camino que encontre o si el costo actual es menor al mínimo puntaje
+                //Guardo el costoActual en puntaje minimo y copio la lista en mejorCamino
+                if(actual.getElem().equals(destino)){
+                    if(puntajeMinimo[0] == -1 || costoActual < puntajeMinimo[0]){
+                        puntajeMinimo[0] = costoActual;
+                        mejorCamino[0] = visitados.clone();
+                    }
+                }else{
+                    //Tomo el primer adyacente del nodo en el que estoy parado para pasar a las siguientes habitaciones
+                    NodoAdy siguiente = actual.getPrimerAdy();
+                    while(siguiente != null){
+                        //Verifico que la habitacion que voy a visitar no este en la lista visitados
+                        if(!pertenece(visitados, siguiente.getVertice().getElem())){
+                            //En nuevoCosto guardo el maximo entre el costoActual y el costo de pasar a la siguiente habitacion, luego lo paso como costoActual
+                            int nuevoCosto = Math.max(costoActual, siguiente.getEtiqueta());
+                            //Llamado recursivo con la siguiente habitacion, si no hay un camino todavía o el nuevo costo es mejor que el puntaje alcanzado anteriormente
+                            if(puntajeMinimo[0] == -1 || nuevoCosto < puntajeMinimo[0]){
+                                minimoPuntajeAux(siguiente.getVertice(), destino, visitados, cantVisitados, mejorCamino, puntajeMinimo, nuevoCosto);
+                            }
+                        }
+                        siguiente = siguiente.getSigAdyacente();
+                    }
+                }
+            }
+            //Vacio la lista de visitados una vez que termina un camino
+            visitados.eliminar(cantVisitados);
+    }
     public Lista caminosSinPasarPor(Object origen, Object destino, Object aEvitar, int maxCosto) {
         Lista caminos = new Lista();
         NodoVert vertOrigen = ubicarVertice(origen);
@@ -281,7 +379,7 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
 
         if (actual.getElem().equals(destino)) {
             // Como buscamos TODOS los caminos, guardamos una copia y dejamos que la recursión siga buscando
-            caminos.insertar(copiarLista(caminoActual), caminos.longitud() + 1);
+            caminos.insertar(caminoActual.clone(), caminos.longitud() + 1);
         } else {
             NodoAdy ady = actual.getPrimerAdy();
             while (ady != null) {
@@ -303,41 +401,6 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
     }
 
 
-    private void minimoPuntajeAux(NodoVert actual, Object destino, Lista visitados, Lista mejorCamino, int[] puntajeMinimo, int costoActual) {
-            //Verifico que el nodo vertice actual sea distinto de null y que no me este parando en una habitacion que ya visite
-            if(actual != null && !pertenece(visitados, actual.getElem())){
-                //Agrego la habitacion actual a visitados
-                visitados.insertar(actual.getElem(), visitados.longitud()+1);
-                //Verifico si estoy en el destino, si me encuentro en el destino verifico si es el primer camino que encontre
-                //Guardo el costoActual en puntaje minimo y copio la lista en mejorCamino
-                if(actual.getElem().equals(destino)){
-                    if(puntajeMinimo[0] == -1){
-                        puntajeMinimo[0] = costoActual;
-                        copiarLista(visitados,mejorCamino);
-                    }else{
-                        if(costoActual < puntajeMinimo[0]){
-                            puntajeMinimo[0] = costoActual;
-                            copiarLista(visitados, mejorCamino);
-                        }
-                    }
-                }else{
-                    //Tomo el primer adyacente del nodo en el que estoy parado para pasar a las siguientes habitaciones
-                    NodoAdy siguiente = actual.getPrimerAdy();
-                    while(siguiente != null){
-                        //Verifico que la habitacion que voy a visitar no este en la lista visitados
-                        if(!pertenece(visitados, siguiente.getVertice().getElem())){
-                            //En nuevoCosto guardo el maximo entre el costoActual y el costo de pasar a la siguiente habitacion, luego lo paso como costoActual
-                            int nuevoCosto = Math.max(costoActual, (int) siguiente.getEtiqueta());
-                            //Llamado recursivo con la siguiente habitacion
-                            minimoPuntajeAux(siguiente.getVertice(), destino, visitados, mejorCamino, puntajeMinimo, nuevoCosto);
-                        }
-                        siguiente = siguiente.getSigAdyacente();
-                    }
-                }
-            }
-            //Vacio la lista de visitados una vez que termina un camino
-            visitados.eliminar(visitados.longitud());
-    }
 
     public boolean existeCamino(Object origen, Object destino) {
         NodoVert vertOrigen = ubicarVertice(origen);
@@ -367,35 +430,40 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
     }
 
     public Lista caminoMasLargo(Object origen, Object destino) {
-        Lista caminoActual = new Lista();
-        Lista caminoMax = new Lista();
         NodoVert vertOrigen = ubicarVertice(origen);
         NodoVert vertDestino = ubicarVertice(destino);
+
+        Lista[] caminoMax = new Lista[1];
+        caminoMax[0] = new Lista();
+        int[] maxNodosVisitados = {0};
+
         if (vertOrigen != null && vertDestino != null) {
-            caminoMasLargoAux(vertOrigen, destino, caminoActual, caminoMax, new Lista());
+            Lista caminoActual = new Lista();
+            caminoMasLargoAux(vertOrigen, destino, caminoActual, caminoMax, 0, maxNodosVisitados);
         }
-        return caminoMax;
+        return caminoMax[0];
     }
 
-    private void caminoMasLargoAux(NodoVert actual, Object destino, Lista camino, Lista caminoMax, Lista visitados) {
-        if (!pertenece(visitados, actual.getElem())) {
-            camino.insertar(actual.getElem(), camino.longitud() + 1);
-            visitados.insertar(actual.getElem(), visitados.longitud() + 1);
+    private void caminoMasLargoAux(NodoVert actual, Object destino, Lista camino, Lista[] caminoMax, int nodosVisitados, int[] maxNodosVisitados) {
+        if (!pertenece(camino, actual.getElem())) {
+            nodosVisitados++;
+            camino.insertar(actual.getElem(), nodosVisitados);
 
             if (actual.getElem().equals(destino)) {
-                if (camino.longitud() > caminoMax.longitud()) {
-                    copiarLista(camino, caminoMax);
+
+                if (nodosVisitados > maxNodosVisitados[0]) {
+                    maxNodosVisitados[0] = nodosVisitados;
+                    caminoMax[0] = camino.clone();
                 }
             } else {
                 NodoAdy ady = actual.getPrimerAdy();
                 while (ady != null) {
-                    caminoMasLargoAux(ady.getVertice(), destino, camino, caminoMax, visitados);
+                    caminoMasLargoAux(ady.getVertice(), destino, camino, caminoMax, nodosVisitados, maxNodosVisitados);
                     ady = ady.getSigAdyacente();
                 }
             }
 
-            camino.eliminar(camino.longitud());
-            visitados.eliminar(visitados.longitud());
+            camino.eliminar(nodosVisitados);
         }
     }
 
@@ -413,24 +481,27 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
     }
 
     public Lista caminoMasCorto(Object origen, Object destino) {
-        Lista mejorCamino = new Lista();
         NodoVert vertOrigen = ubicarVertice(origen);
         NodoVert vertDestino = ubicarVertice(destino);
+
+        Lista[] mejorCamino = new Lista[1];
+        mejorCamino[0] = new Lista();
+
         if (vertOrigen != null && vertDestino != null) {
             Lista visitados = new Lista();
             int[] mejorCaminoLong = {0};
             caminoMasCortoAux(vertOrigen, destino, visitados, mejorCamino, 0, mejorCaminoLong);
         }
-        return mejorCamino;
+        return mejorCamino[0];
     }
 
-    private void caminoMasCortoAux(NodoVert actual, Object destino, Lista visitados, Lista mejorCamino, int visitadosLong, int[] mejorCaminoLong) {
+    private void caminoMasCortoAux(NodoVert actual, Object destino, Lista visitados, Lista[] mejorCamino, int visitadosLong, int[] mejorCaminoLong) {
         visitadosLong++;
         visitados.insertar(actual.getElem(), visitadosLong);
 
         if (actual.getElem().equals(destino)) {
             if (mejorCaminoLong[0] == 0 || visitadosLong < mejorCaminoLong[0]) {
-                copiarLista(visitados, mejorCamino);
+                mejorCamino[0] = visitados.clone();
                 mejorCaminoLong[0] = visitadosLong;
             }
         } else {
@@ -487,23 +558,16 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
         return visitados;
     }
 
-    private void copiarLista(Lista origen, Lista destino) {
-        destino.vaciar();
-        for (int i = 1; i <= origen.longitud(); i++) {
-            destino.insertar(origen.recuperar(i), i);
-        }
-    }
-
-    private boolean eliminarArcoAux(NodoVert nodo, Object etiqueta) {
+    private boolean eliminarArcoAux(NodoVert nodo, int etiqueta) {
         boolean logrado = false;
         if (nodo != null) {
             NodoAdy arcoActual = nodo.getPrimerAdy();
             NodoAdy arcoAnterior = nodo.getPrimerAdy();
             while (arcoActual != null && !logrado) {
-                if (arcoActual.getEtiqueta().equals(etiqueta) && arcoActual == nodo.getPrimerAdy()) {
+                if (arcoActual.getEtiqueta() == etiqueta  && arcoActual == nodo.getPrimerAdy()) {
                     nodo.setPrimerAdy(arcoActual.getSigAdyacente());
                     logrado = true;
-                } else if (arcoActual.getEtiqueta().equals(etiqueta) && arcoActual != nodo.getPrimerAdy()) {
+                } else if (arcoActual.getEtiqueta() == etiqueta && arcoActual != nodo.getPrimerAdy()) {
                     arcoAnterior.setSigAdyacente(arcoActual.getSigAdyacente());
                     ;
                     logrado = true;
@@ -570,10 +634,12 @@ public boolean existeArco(Object desde, Object hasta) {
         return string;
     }
 
-public Lista caminoMasCortoPorEtiquetaMinima(Object desde, Object hasta) {
-        Lista mejorCamino = new Lista();
+    public Lista caminoMasCortoPorEtiquetaMinima(Object desde, Object hasta) {
         NodoVert vertOrigen = ubicarVertice(desde);
         NodoVert vertDestino = ubicarVertice(hasta);
+
+        Lista[] mejorCamino = new Lista[1];
+        mejorCamino[0] = new Lista();
 
         if (vertOrigen != null && vertDestino != null) {
             Lista visitados = new Lista();
@@ -581,10 +647,10 @@ public Lista caminoMasCortoPorEtiquetaMinima(Object desde, Object hasta) {
             // Le pasamos 0 como la longitud inicial de visitados
             caminoEtiquetaMinimaAux(vertOrigen, hasta, visitados, mejorCamino, 0, minPuntaje, 0); 
         }
-        return mejorCamino;
+        return mejorCamino[0];
     }
 
-    private void caminoEtiquetaMinimaAux(NodoVert actual, Object destino, Lista visitados, Lista mejorCamino, int puntajeAcumulado, int[] minPuntaje, int longVisitados) {
+    private void caminoEtiquetaMinimaAux(NodoVert actual, Object destino, Lista visitados, Lista[] mejorCamino, int puntajeAcumulado, int[] minPuntaje, int longVisitados) {
         
         // Insertamos en la longitud actual + 1
         visitados.insertar(actual.getElem(), longVisitados + 1);
@@ -592,13 +658,13 @@ public Lista caminoMasCortoPorEtiquetaMinima(Object desde, Object hasta) {
         if (actual.getElem().equals(destino)) {
             if (puntajeAcumulado < minPuntaje[0]) {
                 minPuntaje[0] = puntajeAcumulado;
-                copiarLista(visitados, mejorCamino);
+                mejorCamino[0] = visitados.clone();
             }
         } else {
             NodoAdy ady = actual.getPrimerAdy();
             while (ady != null) {
                 NodoVert vecino = ady.getVertice();
-                int pesoArco = (int) ady.getEtiqueta();
+                int pesoArco = ady.getEtiqueta();
 
                 if (!pertenece(visitados, vecino.getElem()) && (puntajeAcumulado + pesoArco < minPuntaje[0])) {
                     // En la llamada recursiva, mandamos longVisitados + 1. 
@@ -633,7 +699,7 @@ public Lista caminoMasCortoPorEtiquetaMinima(Object desde, Object hasta) {
         caminoActual.insertar(actual.getElem(), caminoActual.longitud() + 1);
 
         if (actual.getElem().equals(destino)) {
-            Lista copia = copiarLista(caminoActual);
+            Lista copia = caminoActual.clone();
             caminos.insertar(copia, caminos.longitud() + 1);
         } else {
             NodoAdy ady = actual.getPrimerAdy();
@@ -651,14 +717,6 @@ public Lista caminoMasCortoPorEtiquetaMinima(Object desde, Object hasta) {
         caminoActual.eliminar(caminoActual.longitud());
     }
 
-    private Lista copiarLista(Lista original) {
-        Lista copia = new Lista();
-        for (int i = 1; i <= original.longitud(); i++) {
-            Object elem = original.recuperar(i);
-            copia.insertar(elem, i);
-        }
-        return copia;
-    }
 
     private boolean contiene(Lista lista, Object elem) {
         boolean encontrado = false;
