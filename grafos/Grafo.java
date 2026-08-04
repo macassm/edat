@@ -159,92 +159,6 @@ public boolean eliminarVertice(Object buscado) {
         }
     }
 
-    /*public boolean eliminarVertice(Object buscado) {
-        boolean exito = false;
-        if (inicio != null) {
-            if (inicio.getElem().equals(buscado)) {
-                this.inicio = inicio.getSigVertice();
-                if (inicio != null) {
-                    NodoVert aux = this.inicio;
-                    while (aux != null) {
-                        this.eliminarArcos(aux.getPrimerAdy(), buscado);
-                        if (aux.getPrimerAdy() != null && aux.getPrimerAdy().getVertice().getElem().equals(buscado)) {
-                            aux.setPrimerAdy(aux.getPrimerAdy().getSigAdyacente());
-                        }
-                        aux = aux.getSigVertice();
-                    }
-                }
-                exito = true;
-            } else {
-                NodoVert aux = this.inicio;
-                NodoVert auxSiguiente = aux.getSigVertice();
-                while (aux != null) {
-                    if (auxSiguiente != null && auxSiguiente.getElem().equals(buscado)) {
-                        aux.setSigVertice(auxSiguiente.getSigVertice());
-                    }
-                    this.eliminarArcos(aux.getPrimerAdy(), buscado);
-                    if (aux.getPrimerAdy() != null && aux.getPrimerAdy().getVertice().getElem().equals(buscado)) {
-                        aux.setPrimerAdy(aux.getPrimerAdy().getSigAdyacente());
-                    }
-                    aux = aux.getSigVertice();
-                    if (aux != null) {
-                        auxSiguiente = aux.getSigVertice();
-                    }
-                }
-                exito = true;
-            }
-        }
-        return exito;
-    }
-
-    private void eliminarArcos(NodoAdy inicio, Object buscado) {
-        if (inicio != null) {
-            NodoAdy aux = inicio;
-            NodoAdy auxSiguiente = inicio.getSigAdyacente();
-            while (aux != null && auxSiguiente != null) {
-                if (auxSiguiente.getVertice().getElem().equals(buscado)) {
-                    aux.setSigAdyacente(auxSiguiente.getSigAdyacente());
-                }else{
-                    aux = aux.getSigAdyacente();
-                }
-                if (aux != null) {
-                    auxSiguiente = aux.getSigAdyacente();
-                }
-            }
-        }
-    }
-
-    public boolean eliminarArco(Object origen, Object destino) {
-        boolean exito = false;
-        NodoVert desde = ubicarVertice(origen);
-        NodoVert hasta = ubicarVertice(destino);
-       if(desde != null && hasta != null){
-        boolean eliminadoIda = eliminarAdyacente(hasta, desde);
-        boolean eliminadoVuelta = eliminarAdyacente(desde, hasta);
-        exito = eliminadoIda && eliminadoVuelta;
-       }
-        return exito;
-    }
-    private boolean eliminarAdyacente(NodoVert origen, NodoVert destino){
-        boolean exito = false;
-        NodoAdy actual = origen.getPrimerAdy();
-        NodoAdy anterior = null;
-        while(actual!=null && !exito){
-            if(actual.getVertice().getElem().equals(destino.getElem())){
-                if(anterior == null){
-                    origen.setPrimerAdy(actual.getSigAdyacente());
-                }else{
-                    anterior.setSigAdyacente(actual.getSigAdyacente());
-                }
-                exito = true;
-            }else{
-                anterior = actual;
-                actual = actual.getSigAdyacente();
-            }
-        }
-        return exito;
-    }*/
-
     public boolean modificarArco(Object origen, Object destino, int etiquetaNueva){
         boolean exito = false;
         NodoVert desde = ubicarVertice(origen);
@@ -295,7 +209,7 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
         } else {
             NodoAdy nodo = actual.getPrimerAdy();
             while (nodo != null && !encontrado) {
-                int pesoArco = (int) nodo.getEtiqueta();
+                int pesoArco = nodo.getEtiqueta();
                 
                 // Solo avanza si no lo visitó Y si sumar esta puerta NO supera el límite total
                 if (!pertenece(visitados, nodo.getVertice().getElem()) && (costoAcum + pesoArco <= maxPuntos)) {
@@ -384,7 +298,7 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
             NodoAdy ady = actual.getPrimerAdy();
             while (ady != null) {
                 NodoVert vecino = ady.getVertice();
-                int pesoArco = (int) ady.getEtiqueta();
+                int pesoArco = ady.getEtiqueta();
 
                 // Ignora si es el nodo prohibido, si ya fue visitado o si supera el costo
                 if (!vecino.getElem().equals(aEvitar) && 
@@ -596,20 +510,7 @@ public boolean existeArco(Object desde, Object hasta) {
         return existe;
     }
 
-/*     private boolean recorrerArcosAux(NodoVert vertice, Object buscado) {
-        boolean encontrado = false;
-        if (vertice != null) {
-            NodoAdy aux = vertice.getPrimerAdy();
-            while (aux != null && !encontrado) {
-                if (aux.getVertice().getElem().equals(buscado)) {
-                    encontrado = true;
-                }
-                aux = aux.getSigAdyacente();
-            }
-        }
-        return encontrado;
-    }
-*/
+
     public boolean vacio() {
         return inicio == null;
     }
