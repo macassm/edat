@@ -73,11 +73,41 @@ public class EscapeHouse {
 
     public boolean agregarDesafio(Desafio d){
         boolean valido = false;
+        if (d != null){
+            //creamos un aux liviano para utilizar el arbolAVL
+            Habitacion habAux = new Habitacion(d.getCodigoHabitacion());
+            //revisamos que exista la habitacion donde el desafío debería estar
+            if (tablaHabitaciones.pertenece(habAux)){
+                //Verificamos si se pudo insertar, si ya estaba el desafío, devolvió falso.
+                boolean desafioInsertado = tablaDesafios.insertar(d);
+                if (desafioInsertado){
+                    //creamos un puntero con la habitacion deseada y guardamos el desafio en el arbol interno de desafios
+                    Habitacion hab = (Habitacion) tablaHabitaciones.obtener(habAux);
+                    hab.getDesafios().insertar(d);
+                    valido = true;
+                }
+            }
+        }
         return valido;
     }
 
     public boolean eliminarDesafio(Desafio d){
         boolean valido = false;
+        if (d != null){
+            //guardamos si existía el desafío en la base de datos de Desafíos
+            boolean desafioEliminado = tablaDesafios.eliminar(d);
+            if (desafioEliminado){
+                //creamos una habitacion liviana y la buscamos para poder borrar el desafio de su arbol interno
+                Habitacion habAux = new Habitacion(d.getCodigoHabitacion());
+                Habitacion hab = (Habitacion) tablaHabitaciones.obtener(habAux);
+                //Si estaba la habitacion, eliminamos el desafío
+                if (hab != null){
+                    hab.getDesafios().eliminar(d);
+                }
+                //como se borró de la base de datos de la casa, fue válido el borrado
+                valido = true;
+            }
+        }
         return valido;
     }
 
