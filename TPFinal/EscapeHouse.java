@@ -26,7 +26,7 @@ public class EscapeHouse {
     //Modificaciones
     public boolean insertarHabitacion(Habitacion h){
         boolean valido = false;
-        if (!tablaHabitaciones.pertenece(h.getCodigo())){
+        if (!tablaHabitaciones.pertenece(new Habitacion(h.getCodigo()))){
             //guardamos la habitación en la tabla de habitaciones para guardar los datos
             tablaHabitaciones.insertar(h);
             //guardamos la clave de la habitación en el plano de la casa
@@ -38,7 +38,7 @@ public class EscapeHouse {
 
     public boolean eliminarHabitacion(int codigoHabitacion){
         boolean valido = false;
-        if (codigoHabitacion != this.idHabitacionEntrada && codigoHabitacion != this.idHabitacionSalida && tablaHabitaciones.pertenece(codigoHabitacion)){
+        if (codigoHabitacion != this.idHabitacionEntrada && codigoHabitacion != this.idHabitacionSalida && tablaHabitaciones.pertenece(new Habitacion(codigoHabitacion))){
             tablaHabitaciones.eliminar(codigoHabitacion); //se elimina la habitación de la base de datos
             planoCasa.eliminarVertice(codigoHabitacion); //se elimina la habitacion de la casa con sus puertas
             valido = true;
@@ -48,10 +48,9 @@ public class EscapeHouse {
 
     public boolean insertarPuerta(int habOrigen, int habDestino, int puntajeExigido){
         boolean valido = false;
-        if (puntajeExigido > 0 && !planoCasa.existeArco(habOrigen, habDestino) && tablaHabitaciones.pertenece(habOrigen) && tablaHabitaciones.pertenece(habDestino)){
+        if (puntajeExigido > 0 && !planoCasa.existeArco(habOrigen, habDestino) && tablaHabitaciones.pertenece(habOrigen) && tablaHabitaciones.pertenece(new Habitacion (habDestino))){
             //se agrega en ambos sentidos la puerta
             planoCasa.insertarArco(habOrigen, habDestino, puntajeExigido);
-            planoCasa.insertarArco(habDestino, habOrigen, puntajeExigido);
             valido = true;
         }
         return valido;
@@ -61,7 +60,6 @@ public class EscapeHouse {
         boolean exito = false;
         if(planoCasa.existeArco(habOrigen, habDestino)){
             planoCasa.eliminarArco(habOrigen, habDestino);
-            planoCasa.eliminarArco(habDestino, habOrigen);
             exito = true;
         }
         return exito;

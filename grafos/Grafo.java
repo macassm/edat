@@ -158,6 +158,23 @@ public boolean eliminarVertice(Object buscado) {
             }
         }
     }
+    public boolean eliminarArco(Object origen, Object destino) {
+        boolean exito = false;
+        NodoVert desde = ubicarVertice(origen);
+        NodoVert hasta = ubicarVertice(destino);
+
+        if (desde != null && hasta != null) {
+            // Validamos si la puerta realmente existe antes de borrar
+            if (existeArco(origen, destino)) {
+                // Borramos la ida
+                eliminarArcoUnidireccional(desde, destino);
+                // Borramos la vuelta
+                eliminarArcoUnidireccional(hasta, origen);
+                exito = true;
+            }
+        }
+        return exito;
+    }
 
     public boolean modificarArco(Object origen, Object destino, int etiquetaNueva){
         boolean exito = false;
