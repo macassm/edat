@@ -27,9 +27,9 @@ public class EscapeHouse {
     public boolean insertarHabitacion(Habitacion h){
         boolean valido = false;
         if (!tablaHabitaciones.pertenece(new Habitacion(h.getCodigo()))){
-            //guardamos la habitación en la tabla de habitaciones para guardar los datos
+            //guardamos la habitacion en la tabla de habitaciones para guardar los datos
             tablaHabitaciones.insertar(h);
-            //guardamos la clave de la habitación en el plano de la casa
+            //guardamos la clave de la habitacion en el plano de la casa
             planoCasa.insertarVertice(h.getCodigo());
             valido = true;
         }
@@ -39,7 +39,7 @@ public class EscapeHouse {
     public boolean eliminarHabitacion(int codigoHabitacion){
         boolean valido = false;
         if (codigoHabitacion != this.idHabitacionEntrada && codigoHabitacion != this.idHabitacionSalida && tablaHabitaciones.pertenece(new Habitacion(codigoHabitacion))){
-            tablaHabitaciones.eliminar(codigoHabitacion); //se elimina la habitación de la base de datos
+            tablaHabitaciones.eliminar(new Habitacion(codigoHabitacion)); //se elimina la habitacion de la base de datos
             planoCasa.eliminarVertice(codigoHabitacion); //se elimina la habitacion de la casa con sus puertas
             valido = true;
         }
@@ -48,7 +48,7 @@ public class EscapeHouse {
 
     public boolean insertarPuerta(int habOrigen, int habDestino, int puntajeExigido){
         boolean valido = false;
-        if (puntajeExigido > 0 && !planoCasa.existeArco(habOrigen, habDestino) && tablaHabitaciones.pertenece(habOrigen) && tablaHabitaciones.pertenece(new Habitacion (habDestino))){
+        if (puntajeExigido > 0 && !planoCasa.existeArco(habOrigen, habDestino) && tablaHabitaciones.pertenece(new Habitacion(habOrigen)) && tablaHabitaciones.pertenece(new Habitacion (habDestino))){
             //se agrega en ambos sentidos la puerta
             planoCasa.insertarArco(habOrigen, habDestino, puntajeExigido);
             valido = true;
@@ -57,16 +57,20 @@ public class EscapeHouse {
     }
 
     public boolean eliminarPuerta(int habOrigen, int habDestino){
-        boolean exito = false;
-        if(planoCasa.existeArco(habOrigen, habDestino)){
-            planoCasa.eliminarArco(habOrigen, habDestino);
-            exito = true;
-        }
-        return exito;
+        // El Grafo valida si existe y nos devuelve true si logro borrarlo.
+        return planoCasa.eliminarArco(habOrigen, habDestino);
     }
 
-    public boolean modificarHabitacion(String nuevoNombre, int nuevaPlanta, double nuevoTamañoMtsCuadrados,){
-        //mmm nose
+    public boolean modificarHabitacion(String nuevoNombre, int nuevaPlanta, double nuevoTamanioMtsCuadrados, int codigo){
+       boolean exito = false;
+       Habitacion aModificar = (Habitacion)tablaHabitaciones.obtener(new Habitacion(codigo));
+       if(aModificar!=null){
+        aModificar.setNombre(nuevoNombre);
+        aModificar.setPlanta(nuevaPlanta);
+        aModificar.setMetrosCuadrados(nuevoTamanioMtsCuadrados);
+        exito = true;
+       }
+       return exito;
     }
 
     public boolean agregarDesafio(Desafio d){
@@ -79,9 +83,13 @@ public class EscapeHouse {
         return valido;
     }
 
-    public boolean agregarEquipo(Equipo e){
-        boolean valido = false;
-        return valido;
+    public boolean agregarEquipo(Equipo equipo){
+        boolean exito = false;
+        if(!tablaEquipos.containsKey(equipo.getNombre())){
+            tablaEquipos.put(equipo.getNombre(),equipo);
+            exito = true;
+        }
+        return exito;
     }
 
     //Consultas
