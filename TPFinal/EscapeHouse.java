@@ -208,8 +208,34 @@ public class EscapeHouse {
         }
         return puede;
     }
-
-
-
-
+    
+    public boolean jugarDesafio(String nombreEquipo, int codigoHabitacion, int puntajeDesafio){
+        boolean exito = false;
+        Equipo equipo = tablaEquipos.get(nombreEquipo);
+        Habitacion hab = (Habitacion) tablaHabitaciones.obtener(new Habitacion(codigoHabitacion));
+        if(equipo!=null && equipo.getCodigoHabitacionActual() == codigoHabitacion && hab != null){
+            Desafio desafio = (Desafio)hab.getDesafios().obtener(new Desafio(puntajeDesafio));
+            if(desafio!=null){
+                Lista lista = desafiosResueltosPorEquipo.get(nombreEquipo);
+            if(lista == null){
+                lista = new Lista();
+                desafiosResueltosPorEquipo.put(nombreEquipo, lista);
+            }
+            if(!yaResolvio(lista, puntajeDesafio, codigoHabitacion)){
+                lista.insertar(desafio,lista.longitud()+1 );
+                equipo.setPuntajeActualEnHabitacion(equipo.getPuntajeActualEnHabitacion()+puntajeDesafio);
+                equipo.setPuntajeTotal(equipo.getPuntajeTotal()+puntajeDesafio);
+                exito = true;
+            }
+            }
+        }
+        return exito;
+    }
+    public boolean yaResolvio(Lista lista, int puntajeDesafio, int codigoHabitacion){
+        boolean encontrado = false;
+        if(lista.localizar(new Desafio(puntajeDesafio,codigoHabitacion)) != -1){
+            encontrado = true;
+        }
+        return encontrado;
+    }
 }

@@ -19,7 +19,10 @@ public class Desafio implements Comparable<Desafio>{
     public Desafio(int puntaje) {
         this.puntaje = puntaje;
     }
- 
+    public Desafio(int puntaje, int codigoHabitacion){
+        this.puntaje = puntaje;
+        this.codigoHabitacion = codigoHabitacion;
+    }
     public int getPuntaje() {
         return puntaje;
     }
@@ -54,7 +57,7 @@ public class Desafio implements Comparable<Desafio>{
         } else{
             if(otroDesafio != null && otroDesafio instanceof Desafio){
                 Desafio otro = (Desafio) otroDesafio;
-                iguales = this.puntaje == otro.puntaje;
+                iguales = this.puntaje == otro.puntaje && this.codigoHabitacion == otro.codigoHabitacion;
             }
         }
         return iguales;
