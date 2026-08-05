@@ -162,7 +162,7 @@ public class EscapeHouse {
         String informacion = "";
         return informacion;
     }
-
+    
     public String habitacionesContiguas(int codigo){
     String informacion = "La habitacion no existe";  // mensaje si la habitación no existe
     if(tablaHabitaciones.pertenece(new Habitacion(codigo))){
@@ -177,7 +177,7 @@ public class EscapeHouse {
     }
     return informacion;
 }
-
+    
     //Creo que no hace falta que sean contiguas
     public boolean esPosibleLlegar(int codigo1, int codigo2, int puntos){
         return this.planoCasa.esPosibleLlegar(codigo1, codigo2, puntos);
@@ -375,4 +375,18 @@ public class EscapeHouse {
     }
     return info;
 }
+    public String mostrarSistema(){
+        String info = "";
+        info += "=== Grafo (plano de la casa) ===\n" + planoCasa.toString();
+        info += "\n=== Habitaciones (AVL) ===\n" + tablaHabitaciones.toString();
+        info += "\n=== Desafios por habitacion ===\n";
+        Lista habitaciones = tablaHabitaciones.listar();
+        for(int i = 1; i <= habitaciones.longitud(); i++){
+                Habitacion hab = (Habitacion) habitaciones.recuperar(i);
+            info += "Habitacion " + hab.getCodigo() + ":\n" + hab.getDesafios().toString();
+        }
+        info += "\n=== Equipos (Hash) ===\n" + tablaEquipos.toString();
+        info += "\n=== Desafios resueltos por equipo (Hash) ===\n" + desafiosResueltosPorEquipo.toString();
+        return info;
+    }
 }

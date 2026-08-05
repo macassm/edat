@@ -281,33 +281,27 @@ public class ArbolAVL{
     }
 
     private String toStringAux(NodoAVL nodoActual) {
-        String texto = "";
-
-        if (nodoActual != null) {
-            texto += nodoActual.getElem().toString() + " -> ";
-            texto += "HI: ";
-            if (nodoActual.getIzquierdo() != null) {
-                texto += nodoActual.getIzquierdo().getElem();
-            } else {
-                texto += "N/A";
-            }
-
-            texto += " HD: ";
-
-            if (nodoActual.getDerecho() != null) {
-                texto += nodoActual.getDerecho().getElem();
-            } else {
-                texto += "N/A";
-            }
-
-            texto += "\n";
-
-            texto += toStringAux(nodoActual.getIzquierdo());
-            texto += toStringAux(nodoActual.getDerecho());
-
+    String texto = "";
+    if (nodoActual != null) {
+        texto += nodoActual.getElem().toString() + " -> ";
+        texto += "Altura: " + nodoActual.getAltura() + " -> "; 
+        texto += "HI: ";
+        if (nodoActual.getIzquierdo() != null) {
+            texto += nodoActual.getIzquierdo().getElem();
+        } else {
+            texto += "N/A";
         }
-
-        return texto;
+        texto += " HD: ";
+        if (nodoActual.getDerecho() != null) {
+            texto += nodoActual.getDerecho().getElem();
+        } else {
+            texto += "N/A";
+        }
+        texto += "\n";
+        texto += toStringAux(nodoActual.getIzquierdo());
+        texto += toStringAux(nodoActual.getDerecho());
     }
+    return texto;
+}
 
 }
