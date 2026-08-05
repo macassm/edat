@@ -117,6 +117,7 @@ public class EscapeHouse {
         boolean exito = false;
         if(!tablaEquipos.containsKey(equipo.getNombre())){
             tablaEquipos.put(equipo.getNombre(),equipo);
+            desafiosResueltosPorEquipo.put(equipo.getNombre(), new Lista());
             exito = true;
         }
         return exito;
@@ -171,12 +172,25 @@ public class EscapeHouse {
         //Consultas de Desafios
 
     public String mostrarDesafio(int puntaje, int codHabitacion){
-        String info = "";
+        String info = "El desafío no existe en el sistema";
+        Desafio desafioAux = new Desafio(puntaje, codHabitacion);
+        Desafio desafio = (Desafio) tablaDesafios.obtener(desafioAux);
+        if (desafio != null){
+            info = desafio.toString();
+        }
         return info;
     }
 
     public String mostrarDesafiosResueltos(Equipo eq){
-        String info = "";
+        String info = "El equipo no existe";
+        if (eq != null && desafiosResueltosPorEquipo.containsKey(eq.getNombre())){
+            Lista lista = desafiosResueltosPorEquipo.get(eq.getNombre());
+            if(lista.esVacia()){
+                info = "El equipo " + eq.getNombre() + " no resolvió ningún desafío";
+            }else{
+                info = "el equipo " + eq.getNombre() + " resolvió:"+ "\n"  + lista.toString();
+            }
+        }
         return info;
     }
 
