@@ -207,10 +207,11 @@ public class EscapeHouse {
         return resuelto;
     }
 
-    public Lista mostrarDesafiosTipo(Habitacion h, int puntajeA, int puntajeB, String tipoX){
+    public String mostrarDesafiosTipo(Habitacion h, int puntajeA, int puntajeB, String tipoX){
+        String desafios = "No se encontraron desafios que coincidan con los parámetros";
         Lista lista = new Lista();
         int longLista = 0;
-        if (h != null && puntajeA > 0 && puntajeB > puntajeA && tipoX != null){
+        if (h != null && puntajeA > 0 && puntajeB >= puntajeA && tipoX != null){
             tipoX = tipoX.toLowerCase();
             if (tipoX.equals("lógico") || tipoX.equals("matemático") || tipoX.equals("destreza") || tipoX.equals("letras") || tipoX.equals("búsqueda") || tipoX.equals("ingenio")) {
                 ArbolAVL desafiosHabitacion = h.getDesafios();
@@ -224,23 +225,32 @@ public class EscapeHouse {
                         
                         int i = 1;
 
-                        while(i < longitud){
+                        while(i <= longitud){
                             Desafio def = (Desafio) desafiosEnRango.recuperar(i);
                             if (def.getTipo().equalsIgnoreCase(tipoX)){
-                                lista.insertar(def, longLista+1);
+                                longLista++;
+                                lista.insertar(def, longLista);
                             }
                             i++;
                         }
+                        if (!lista.esVacia()){
+                            desafios = "Desafíos encontrados:\n" + lista.toString();
+                        }
                     }
                 }
-            }   
+            }
+
         }
-        return lista;
+        return desafios;
     }
 
         //consulta sobre equipos
     public String mostrarInfoEquipos(String nombreEq){
-        String info = "";
+        String info = "No se encontró un equipo con el nombre " + nombreEq;
+        if (nombreEq != null && tablaEquipos.containsKey(nombreEq)){
+            info = tablaEquipos.get(nombreEq).toString() + "\nDesafios resueltos:\n" + desafiosResueltosPorEquipo.get(nombreEq).toString();
+        }
+
         return info;
     }
     public boolean puedeSalir(String nombreEquipo){
