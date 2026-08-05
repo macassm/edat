@@ -11,7 +11,7 @@ public class EscapeHouse {
     private HashMap<String, Equipo> tablaEquipos;
     private HashMap<String, Lista> desafiosResueltosPorEquipo;
 
-    //variables que guardan cuál es la entrada y salida de la casa.
+    //variables que guardan cual es la entrada y salida de la casa.
     private int idHabitacionEntrada = -1;
     private int idHabitacionSalida = -1;
 
@@ -131,9 +131,19 @@ public class EscapeHouse {
     }
 
     public String habitacionesContiguas(int codigo){
-        String informacion = "";
-        return informacion;
+    String informacion = "La habitacion no existe";  // mensaje si la habitación no existe
+    if(tablaHabitaciones.pertenece(new Habitacion(codigo))){
+        informacion = "Habitaciones contiguas: ";
+        Lista adyacentes = planoCasa.verticesAdyacentes(codigo);
+        for(int i = 1; i <= adyacentes.longitud(); i++){
+            int codigoVecino = (Integer) adyacentes.recuperar(i);
+            Habitacion vecino = (Habitacion) tablaHabitaciones.obtener(new Habitacion(codigoVecino));
+            int puntaje = planoCasa.obtenerEtiqueta(codigo, codigoVecino);
+            informacion += "\n" + vecino.getNombre() + ": " + puntaje + " puntos";
+        }
     }
+    return informacion;
+}
 
     //Creo que no hace falta que sean contiguas
     public boolean esPosibleLlegar(int codigo1, int codigo2, int puntos){
@@ -153,7 +163,7 @@ public class EscapeHouse {
     public String sinPasarPor(int cod1, int cod2, int cod3, int puntajeMax){
         String informacion = "No hay caminos disponibles que cumplan con esas condiciones.";
         
-        // Llamamos al grafo pasándole el origen, destino, la habitación a evitar y los puntos máximos
+        // Llamamos al grafo pasandole el origen, destino, la habitacion a evitar y los puntos maximos
         Lista caminos = planoCasa.caminosSinPasarPor(cod1, cod2, cod3, puntajeMax);
         
         if (!caminos.esVacia()) {
