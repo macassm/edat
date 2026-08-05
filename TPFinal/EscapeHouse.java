@@ -35,7 +35,20 @@ public class EscapeHouse {
         }
         return valido;
     }
-
+    public boolean eliminarEquipo(String nombreEquipo){
+        boolean exito = false;
+        if(tablaEquipos.containsKey(nombreEquipo)){
+            Lista lista = tablaHabitaciones.listar();
+            for(int i =1 ; i <= lista.longitud();i++){
+                Habitacion hab = (Habitacion) lista.recuperar(i);
+                hab.getPuntajeEquipos().remove(nombreEquipo);
+            }
+            tablaEquipos.remove(nombreEquipo);
+            desafiosResueltosPorEquipo.remove(nombreEquipo);
+            exito = true;
+        }
+        return exito;
+    }
     public boolean eliminarHabitacion(int codigoHabitacion){
         boolean valido = false;
         if (codigoHabitacion != this.idHabitacionEntrada && codigoHabitacion != this.idHabitacionSalida && tablaHabitaciones.pertenece(new Habitacion(codigoHabitacion))){
@@ -60,7 +73,19 @@ public class EscapeHouse {
         // El Grafo valida si existe y nos devuelve true si logro borrarlo.
         return planoCasa.eliminarArco(habOrigen, habDestino);
     }
-
+    public boolean modificarDesafio(String nuevoNombre, String nuevoTipo, int puntaje, int codigo){
+        boolean exito = false;
+        Habitacion hab = (Habitacion) tablaHabitaciones.obtener(new Habitacion(codigo));
+        if(hab!=null){
+            Desafio des = (Desafio)hab.getDesafios().obtener(new Desafio(puntaje));
+            if(des!=null){
+            des.setNombre(nuevoNombre);
+            des.setTipo(nuevoTipo);
+            exito = true;
+        }
+        }
+        return exito;
+    }
     public boolean modificarHabitacion(String nuevoNombre, int nuevaPlanta, double nuevoTamanioMtsCuadrados, int codigo){
        boolean exito = false;
        Habitacion aModificar = (Habitacion)tablaHabitaciones.obtener(new Habitacion(codigo));
@@ -72,7 +97,15 @@ public class EscapeHouse {
        }
        return exito;
     }
-
+    public boolean modificarEquipo(String nombreEquipo,int puntajeExigidoNuevo){
+        boolean exito   = false;
+        Equipo equipo = tablaEquipos.get(nombreEquipo);
+        if(equipo!=null){
+            equipo.setPuntajeExigido(puntajeExigidoNuevo);
+            exito = true;
+        }
+        return exito;
+    }
     public boolean agregarDesafio(Desafio d){
         boolean valido = false;
         if (d != null){
@@ -182,7 +215,7 @@ public class EscapeHouse {
         //Consultas de Desafios
 
     public String mostrarDesafio(int puntaje, int codHabitacion){
-        String info = "El desafío no existe en el sistema";
+        String info = "El desafio no existe en el sistema";
         Desafio desafioAux = new Desafio(puntaje, codHabitacion);
         Desafio desafio = (Desafio) tablaDesafios.obtener(desafioAux);
         if (desafio != null){
@@ -208,7 +241,6 @@ public class EscapeHouse {
     public boolean verificarDesafioResuelto(Equipo eq, Desafio de){
         boolean resuelto = false;
         if(eq != null && de != null && desafiosResueltosPorEquipo.containsKey(eq.getNombre())){
-
             Lista resueltos = desafiosResueltosPorEquipo.get(eq.getNombre());
             resuelto = (resueltos.localizar(de) > 0);
         }
