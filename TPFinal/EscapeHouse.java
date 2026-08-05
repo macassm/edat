@@ -188,19 +188,30 @@ public class EscapeHouse {
             if(lista.esVacia()){
                 info = "El equipo " + eq.getNombre() + " no resolvió ningún desafío";
             }else{
-                info = "el equipo " + eq.getNombre() + " resolvió:"+ "\n"  + lista.toString();
+                info = "el equipo " + eq.getNombre() + " resolvió:" + "\n"  + lista.toString();
             }
         }
         return info;
     }
 
-    public boolean verificarDesafioResuelto(Equipo eq, Desafio de, Habitacion ha){
+    //quitamos el parámetro de habitación porque consideramos que no era necesario para hacer la consulta
+    public boolean verificarDesafioResuelto(Equipo eq, Desafio de){
         boolean resuelto = false;
+        if(eq != null && de != null && desafiosResueltosPorEquipo.containsKey(eq.getNombre())){
+
+            Lista resueltos = desafiosResueltosPorEquipo.get(eq.getNombre());
+            resuelto = (resueltos.localizar(de) > 0);
+
+        }
+
         return resuelto;
     }
 
     public Lista mostrarDesafiosTipo(Habitacion h, int puntajeA, int puntajeB, String tipoX){
         Lista lista = new Lista();
+        if (h != null && puntajeA > 0 && puntajeB > puntajeA && tipoX == ){
+
+        }
         return lista;
     }
 
@@ -230,7 +241,11 @@ public class EscapeHouse {
         if(equipo!=null && equipo.getCodigoHabitacionActual() == codigoHabitacion && hab != null){
             Desafio desafio = (Desafio)hab.getDesafios().obtener(new Desafio(puntajeDesafio));
             if(desafio!=null){
-            Lista lista = desafiosResueltosPorEquipo.get(nombreEquipo);
+                Lista lista = desafiosResueltosPorEquipo.get(nombreEquipo);
+            if(lista == null){
+                lista = new Lista();
+                desafiosResueltosPorEquipo.put(nombreEquipo, lista);
+            }
             if(!yaResolvio(lista, puntajeDesafio, codigoHabitacion)){
                 lista.insertar(desafio,lista.longitud()+1 );
                 equipo.setPuntajeActualEnHabitacion(equipo.getPuntajeActualEnHabitacion()+puntajeDesafio);
@@ -241,21 +256,11 @@ public class EscapeHouse {
         }
         return exito;
     }
-    private boolean yaResolvio(Lista lista, int puntajeDesafio, int codigoHabitacion){
+    public boolean yaResolvio(Lista lista, int puntajeDesafio, int codigoHabitacion){
         boolean encontrado = false;
         if(lista.localizar(new Desafio(puntajeDesafio,codigoHabitacion)) != -1){
             encontrado = true;
         }
         return encontrado;
-    }
-    public boolean cambiarDeHabitacion(String nombreEquipo, int codigoDestino){
-        boolean exito = false;
-        Equipo equipo = tablaEquipos.get(nombreEquipo);
-        if(equipo != null){
-            Habitacion actual = (Habitacion) tablaHabitaciones.obtener(new Habitacion(equipo.getCodigoHabitacionActual()));
-            
-        }
-
-        return exito;
     }
 }
