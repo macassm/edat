@@ -159,7 +159,13 @@ public class EscapeHouse {
     //Consultas
         //consultas de Habitaciones
     public String mostrarHabitacion(int codigo){
-        String informacion = "";
+        String informacion = "La habitación " + codigo + " no existe en el sistema.";
+        Habitacion señuelo = new Habitacion(codigo);
+        
+        Habitacion hab = (Habitacion) tablaHabitaciones.obtener(señuelo);
+        if (hab != null) {
+            informacion = hab.toString();
+        }
         return informacion;
     }
 
