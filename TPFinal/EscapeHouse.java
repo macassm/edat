@@ -11,7 +11,7 @@ public class EscapeHouse {
     private HashMap<String, Equipo> tablaEquipos;
     private HashMap<String, Lista> desafiosResueltosPorEquipo;
 
-    //variables que guardan cuál es la entrada y salida de la casa.
+    //variables que guardan cual es la entrada y salida de la casa.
     private int idHabitacionEntrada = -1;
     private int idHabitacionSalida = -1;
 
@@ -35,7 +35,20 @@ public class EscapeHouse {
         }
         return valido;
     }
-
+    public boolean eliminarEquipo(String nombreEquipo){
+        boolean exito = false;
+        if(tablaEquipos.containsKey(nombreEquipo)){
+            Lista lista = tablaHabitaciones.listar();
+            for(int i =1 ; i <= lista.longitud();i++){
+                Habitacion hab = (Habitacion) lista.recuperar(i);
+                hab.getPuntajeEquipos().remove(nombreEquipo);
+            }
+            tablaEquipos.remove(nombreEquipo);
+            desafiosResueltosPorEquipo.remove(nombreEquipo);
+            exito = true;
+        }
+        return exito;
+    }
     public boolean eliminarHabitacion(int codigoHabitacion){
         boolean valido = false;
         if (codigoHabitacion != this.idHabitacionEntrada && codigoHabitacion != this.idHabitacionSalida && tablaHabitaciones.pertenece(new Habitacion(codigoHabitacion))){
@@ -60,7 +73,19 @@ public class EscapeHouse {
         // El Grafo valida si existe y nos devuelve true si logro borrarlo.
         return planoCasa.eliminarArco(habOrigen, habDestino);
     }
-
+    public boolean modificarDesafio(String nuevoNombre, String nuevoTipo, int puntaje, int codigo){
+        boolean exito = false;
+        Habitacion hab = (Habitacion) tablaHabitaciones.obtener(new Habitacion(codigo));
+        if(hab!=null){
+            Desafio des = (Desafio)hab.getDesafios().obtener(new Desafio(puntaje));
+            if(des!=null){
+            des.setNombre(nuevoNombre);
+            des.setTipo(nuevoTipo);
+            exito = true;
+        }
+        }
+        return exito;
+    }
     public boolean modificarHabitacion(String nuevoNombre, int nuevaPlanta, double nuevoTamanioMtsCuadrados, int codigo){
        boolean exito = false;
        Habitacion aModificar = (Habitacion)tablaHabitaciones.obtener(new Habitacion(codigo));
@@ -72,7 +97,15 @@ public class EscapeHouse {
        }
        return exito;
     }
-
+    public boolean modificarEquipo(String nombreEquipo,int puntajeExigidoNuevo){
+        boolean exito   = false;
+        Equipo equipo = tablaEquipos.get(nombreEquipo);
+        if(equipo!=null){
+            equipo.setPuntajeExigido(puntajeExigidoNuevo);
+            exito = true;
+        }
+        return exito;
+    }
     public boolean agregarDesafio(Desafio d){
         boolean valido = false;
         if (d != null){
@@ -131,9 +164,19 @@ public class EscapeHouse {
     }
 
     public String habitacionesContiguas(int codigo){
-        String informacion = "";
-        return informacion;
+    String informacion = "La habitacion no existe";  // mensaje si la habitación no existe
+    if(tablaHabitaciones.pertenece(new Habitacion(codigo))){
+        informacion = "Habitaciones contiguas: ";
+        Lista adyacentes = planoCasa.verticesAdyacentes(codigo);
+        for(int i = 1; i <= adyacentes.longitud(); i++){
+            int codigoVecino = (Integer) adyacentes.recuperar(i);
+            Habitacion vecino = (Habitacion) tablaHabitaciones.obtener(new Habitacion(codigoVecino));
+            int puntaje = planoCasa.obtenerEtiqueta(codigo, codigoVecino);
+            informacion += "\n" + vecino.getNombre() + ": " + puntaje + " puntos";
+        }
     }
+    return informacion;
+}
 
     //Creo que no hace falta que sean contiguas
     public boolean esPosibleLlegar(int codigo1, int codigo2, int puntos){
@@ -153,7 +196,7 @@ public class EscapeHouse {
     public String sinPasarPor(int cod1, int cod2, int cod3, int puntajeMax){
         String informacion = "No hay caminos disponibles que cumplan con esas condiciones.";
         
-        // Llamamos al grafo pasándole el origen, destino, la habitación a evitar y los puntos máximos
+        // Llamamos al grafo pasandole el origen, destino, la habitacion a evitar y los puntos maximos
         Lista caminos = planoCasa.caminosSinPasarPor(cod1, cod2, cod3, puntajeMax);
         
         if (!caminos.esVacia()) {
@@ -172,7 +215,7 @@ public class EscapeHouse {
         //Consultas de Desafios
 
     public String mostrarDesafio(int puntaje, int codHabitacion){
-        String info = "El desafío no existe en el sistema";
+        String info = "El desafio no existe en el sistema";
         Desafio desafioAux = new Desafio(puntaje, codHabitacion);
         Desafio desafio = (Desafio) tablaDesafios.obtener(desafioAux);
         if (desafio != null){
@@ -198,7 +241,6 @@ public class EscapeHouse {
     public boolean verificarDesafioResuelto(Equipo eq, Desafio de){
         boolean resuelto = false;
         if(eq != null && de != null && desafiosResueltosPorEquipo.containsKey(eq.getNombre())){
-
             Lista resueltos = desafiosResueltosPorEquipo.get(eq.getNombre());
             resuelto = (resueltos.localizar(de) > 0);
         }

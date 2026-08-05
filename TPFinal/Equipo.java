@@ -57,7 +57,9 @@ public class Equipo {
     public void setPuntajeActualEnHabitacion(int puntajeActualEnHabitacion) {
         this.puntajeActualEnHabitacion = puntajeActualEnHabitacion;
     }
- 
+    public void setPuntajeExigido(int puntajeNuevo){
+        this.puntajeExigido = puntajeNuevo;
+    }
     @Override
     public String toString() {
         return "Equipo: " + nombre + " Puntaje exigido: " + puntajeExigido

@@ -652,4 +652,17 @@ public boolean existeArco(Object desde, Object hasta) {
         }
         return exito;
     }   
+    //Metodo utilizado para el habitacionesContiguas, ya que devuelve los codigos de las habitaciones adyacentes a la habitacion que le pasamos por parametro
+    public Lista verticesAdyacentes(Object vertice){
+    Lista adyacentes = new Lista();
+    NodoVert v = ubicarVertice(vertice);
+    if(v != null){
+        NodoAdy ady = v.getPrimerAdy();
+        while(ady != null){
+            adyacentes.insertar(ady.getVertice().getElem(), adyacentes.longitud()+1);
+            ady = ady.getSigAdyacente();
+        }
+    }
+    return adyacentes;
+}
 }
