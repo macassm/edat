@@ -195,6 +195,19 @@ public class EscapeHouse {
         String info = "";
         return info;
     }
+    public boolean puedeSalir(String nombreEquipo){
+        boolean puede = false;
+        if(tablaEquipos.containsKey(nombreEquipo)){
+            Equipo equipo = (Equipo) tablaEquipos.get(nombreEquipo);
+            Habitacion habActual = (Habitacion) tablaHabitaciones.obtener(new Habitacion(equipo.getCodigoHabitacionActual()));
+            if(habActual.isTieneSalida()){
+                if(equipo.getPuntajeTotal()>=equipo.getPuntajeExigido()){
+                    puede = true;
+                }
+            }
+        }
+        return puede;
+    }
 
 
 
