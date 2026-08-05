@@ -330,8 +330,22 @@ public boolean esPosibleLlegar(Object vertice1, Object vertice2, int maxPuntos){
         
         caminoActual.eliminar(caminoLong);
     }
-
-
+    //Metodo utilizado para cambiarDeHabitacion busca la etiqueta de la puerta de la habitacion en la que te encontras que te lleva a la que queres ir
+    public int obtenerEtiqueta(Object desde, Object hasta){
+        int etiqueta = -1;
+        NodoVert origen = ubicarVertice(desde);
+        if(origen!=null){
+            NodoAdy ady = origen.getPrimerAdy();
+            while(ady != null && etiqueta == -1){
+                if(ady.getVertice().getElem().equals(hasta)){
+                    etiqueta = ady.getEtiqueta();
+                }else{
+                    ady = ady.getSigAdyacente();
+                }
+            }
+        }
+        return etiqueta;
+    }
 
     public boolean existeCamino(Object origen, Object destino) {
         NodoVert vertOrigen = ubicarVertice(origen);

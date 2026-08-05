@@ -201,9 +201,7 @@ public class EscapeHouse {
 
             Lista resueltos = desafiosResueltosPorEquipo.get(eq.getNombre());
             resuelto = (resueltos.localizar(de) > 0);
-
         }
-
         return resuelto;
     }
 
@@ -241,14 +239,15 @@ public class EscapeHouse {
         if(equipo!=null && equipo.getCodigoHabitacionActual() == codigoHabitacion && hab != null){
             Desafio desafio = (Desafio)hab.getDesafios().obtener(new Desafio(puntajeDesafio));
             if(desafio!=null){
+                if(!hab.getPuntajeEquipos().containsKey(nombreEquipo)){
+                hab.getPuntajeEquipos().put(nombreEquipo, 0);
+                }
+                int puntajeActual = hab.getPuntajeEquipos().get(nombreEquipo);
                 Lista lista = desafiosResueltosPorEquipo.get(nombreEquipo);
-            if(lista == null){
-                lista = new Lista();
-                desafiosResueltosPorEquipo.put(nombreEquipo, lista);
-            }
-            if(!yaResolvio(lista, puntajeDesafio, codigoHabitacion)){
+            if(!verificarDesafioResuelto(equipo, desafio)){
                 lista.insertar(desafio,lista.longitud()+1 );
-                equipo.setPuntajeActualEnHabitacion(equipo.getPuntajeActualEnHabitacion()+puntajeDesafio);
+                equipo.setPuntajeActualEnHabitacion(puntajeActual+puntajeDesafio);
+                hab.getPuntajeEquipos().put(nombreEquipo, puntajeActual + puntajeDesafio);
                 equipo.setPuntajeTotal(equipo.getPuntajeTotal()+puntajeDesafio);
                 exito = true;
             }
@@ -256,11 +255,49 @@ public class EscapeHouse {
         }
         return exito;
     }
-    public boolean yaResolvio(Lista lista, int puntajeDesafio, int codigoHabitacion){
-        boolean encontrado = false;
-        if(lista.localizar(new Desafio(puntajeDesafio,codigoHabitacion)) != -1){
-            encontrado = true;
+    // public boolean yaResolvio(Lista lista, int puntajeDesafio, int codigoHabitacion){
+    //     boolean encontrado = false;
+    //     if(lista.localizar(new Desafio(puntajeDesafio,codigoHabitacion)) != -1){
+    //         encontrado = true;
+    //     }
+    //     return encontrado;
+    // }
+    //Este metodo usa existeArco para verificar que haya una puerta directa entre la habitacion actual del equipo y la destino, y obtenerEtiqueta para saber cuanto puntaje exige esa puerta. Si el equipo tiene acumulado en su habitacion actual al menos ese puntaje, se lo deja pasar: se actualiza su habitacion actual y se le restaura el puntaje que ya tenia guardado en la habitacion destino (o 0 si nunca estuvo ahi).
+    public boolean cambiarDeHabitacion(String nombreEquipo,int codigoDestino){
+        boolean exito = false;
+        Equipo equipo = tablaEquipos.get(nombreEquipo);
+        if(equipo != null){
+            Habitacion hab = (Habitacion)tablaHabitaciones.obtener(new Habitacion(codigoDestino));
+            if(planoCasa.existeArco(equipo.getCodigoHabitacionActual(), codigoDestino)){
+                int puntajeRequerido = planoCasa.obtenerEtiqueta(equipo.getCodigoHabitacionActual(), codigoDestino);
+                if(puntajeRequerido != -1 && equipo.getPuntajeActualEnHabitacion() >= puntajeRequerido){
+                    equipo.setCodigoHabitacionActual(codigoDestino);
+                    equipo.setPuntajeActualEnHabitacion(hab.getPuntajeEquipos().getOrDefault(nombreEquipo, 0));
+                    exito = true;
+                }
+            }
         }
-        return encontrado;
+        return exito;
     }
+    public String posiblesDesafios(String nombreEquipo, int codHabitacionDestino){
+    String info = "El equipo no existe";
+    Equipo equipo = tablaEquipos.get(nombreEquipo);
+    if(equipo != null){
+        if(!planoCasa.existeArco(equipo.getCodigoHabitacionActual(), codHabitacionDestino)){
+            info = "No existe puerta entre la habitacion en la que se encuentra el equipo y la de destino";  // mensaje aclaratorio: hab no es adyacente
+        } else {
+            int puntajeRequerido = planoCasa.obtenerEtiqueta(equipo.getCodigoHabitacionActual(), codHabitacionDestino);
+            Habitacion habActual = (Habitacion) tablaHabitaciones.obtener(new Habitacion(equipo.getCodigoHabitacionActual()));
+            Lista desafios = habActual.getDesafios().listar();
+            info = "Desafios posibles: ";
+            for(int i = 1; i <= desafios.longitud(); i++){
+                Desafio d = (Desafio) desafios.recuperar(i);
+                if(!verificarDesafioResuelto(equipo, d) && equipo.getPuntajeActualEnHabitacion()+d.getPuntaje() >= puntajeRequerido ){  // no resuelto por el equipo, Y que solo alcance
+                    info += "\n "+ d.getNombre() + " Tipo: " + d.getTipo() + " Puntaje: "+d.getPuntaje();
+                }
+            }
+        }
+    }
+    return info;
+}
 }
