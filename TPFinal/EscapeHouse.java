@@ -136,17 +136,35 @@ public class EscapeHouse {
 
     //Creo que no hace falta que sean contiguas
     public boolean esPosibleLlegar(int codigo1, int codigo2, int puntos){
-        boolean esPosible = false;
-        return esPosible;
+        return this.planoCasa.esPosibleLlegar(codigo1, codigo2, puntos);
     }
 
     public String minimoPuntaje(int cod1, int cod2){
-        String informacion = "";
+        String informacion = "No se encontró un camino posible entre estas habitaciones";
+        int[] puntajeMin = new int[1];
+        Lista camino = planoCasa.minimoPuntaje(cod1, cod2, puntajeMin);
+        if (!camino.esVacia()){
+            informacion = "El mejor camino es " + camino.toString() + ". Requiere que el equipo tenga " + puntajeMin[0] + " puntos.";
+        }
         return informacion;
     }
 
     public String sinPasarPor(int cod1, int cod2, int cod3, int puntajeMax){
-        String informacion = "";
+        String informacion = "No hay caminos disponibles que cumplan con esas condiciones.";
+        
+        // Llamamos al grafo pasándole el origen, destino, la habitación a evitar y los puntos máximos
+        Lista caminos = planoCasa.caminosSinPasarPor(cod1, cod2, cod3, puntajeMax);
+        
+        if (!caminos.esVacia()) {
+            informacion = "Caminos posibles:\n";
+            // Recorremos la lista de caminos
+            for (int i = 1; i <= caminos.longitud(); i++) {
+                // Recuperamos cada camino individual (casteando a Lista)
+                Lista caminoActual = (Lista) caminos.recuperar(i);
+                informacion += "Camino " + i + ": " + caminoActual.toString() + "\n";
+            }
+        }
+        
         return informacion;
     }
 
