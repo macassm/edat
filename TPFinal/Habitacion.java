@@ -49,6 +49,9 @@ public class Habitacion implements Comparable<Habitacion>{
     public ArbolAVL getDesafios() {
         return desafios;
     }
+    public HashMap<String, Integer> getPuntajeEquipos(){
+        return puntajeEquipos;
+    }
     // No hay setCodigo(): es el atributo clave, no se puede modificar (pide el enunciado)
     public void setNombre(String nombre) {
         this.nombre = nombre;
