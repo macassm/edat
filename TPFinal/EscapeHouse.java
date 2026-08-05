@@ -1,8 +1,8 @@
 package TPFinal;
-import grafos.*;
 import Conjuntistas.*;
-import java.util.HashMap;
 import Lineales.dinamicas.Lista;
+import grafos.*;
+import java.util.HashMap;
 
 public class EscapeHouse {
     private Grafo planoCasa;
@@ -159,7 +159,13 @@ public class EscapeHouse {
     //Consultas
         //consultas de Habitaciones
     public String mostrarHabitacion(int codigo){
-        String informacion = "";
+        String informacion = "La habitación " + codigo + " no existe en el sistema.";
+        Habitacion señuelo = new Habitacion(codigo);
+        
+        Habitacion hab = (Habitacion) tablaHabitaciones.obtener(señuelo);
+        if (hab != null) {
+            informacion = hab.toString();
+        }
         return informacion;
     }
     
@@ -224,14 +230,14 @@ public class EscapeHouse {
         return info;
     }
 
-    public String mostrarDesafiosResueltos(Equipo eq){
+    public String mostrarDesafiosResueltos(String nomEq){
         String info = "El equipo no existe";
-        if (eq != null && desafiosResueltosPorEquipo.containsKey(eq.getNombre())){
-            Lista lista = desafiosResueltosPorEquipo.get(eq.getNombre());
+        if (desafiosResueltosPorEquipo.containsKey(nomEq)){
+            Lista lista = desafiosResueltosPorEquipo.get(nomEq);
             if(lista.esVacia()){
-                info = "El equipo " + eq.getNombre() + " no resolvió ningún desafío";
+                info = "El equipo " + nomEq + " no resolvió ningún desafío";
             }else{
-                info = "el equipo " + eq.getNombre() + " resolvió:" + "\n"  + lista.toString();
+                info = "el equipo " + nomEq + " resolvió:" + "\n"  + lista.toString();
             }
         }
         return info;
