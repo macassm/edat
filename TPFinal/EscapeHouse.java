@@ -259,7 +259,7 @@ public class EscapeHouse {
         int longLista = 0;
         if (h != null && puntajeA > 0 && puntajeB >= puntajeA && tipoX != null){
             tipoX = tipoX.toLowerCase();
-            if (tipoX.equals("lógico") || tipoX.equals("matemático") || tipoX.equals("destreza") || tipoX.equals("letras") || tipoX.equals("búsqueda") || tipoX.equals("ingenio")) {
+            if (tipoX.equals("logico") || tipoX.equals("matemático") || tipoX.equals("destreza") || tipoX.equals("letras") || tipoX.equals("búsqueda") || tipoX.equals("ingenio")) {
                 ArbolAVL desafiosHabitacion = h.getDesafios();
                 if (!desafiosHabitacion.vacio()){
                     Desafio minPuntaje = new Desafio(puntajeA, h.getCodigo());
