@@ -1,6 +1,7 @@
 package TPFinal;
 
 import Conjuntistas.ArbolAVL;
+import java.util.HashMap;
 
 public class Habitacion implements Comparable<Habitacion>{
     private int codigo;
@@ -9,6 +10,7 @@ public class Habitacion implements Comparable<Habitacion>{
     private double metrosCuadrados;
     private boolean tieneSalida;
     private ArbolAVL desafios; 
+    private HashMap <String, Integer> puntajeEquipos;
 
     public Habitacion(int codigo, String nombre, int planta, double metrosCuadrados, boolean tieneSalida){
         this.codigo = codigo;
@@ -17,6 +19,7 @@ public class Habitacion implements Comparable<Habitacion>{
         this.metrosCuadrados = metrosCuadrados;
         this.tieneSalida = tieneSalida;
         this.desafios = new ArbolAVL();
+        this.puntajeEquipos = new HashMap<>();
     }
     
     public Habitacion(int codigo){

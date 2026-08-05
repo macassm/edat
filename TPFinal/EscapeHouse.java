@@ -234,4 +234,14 @@ public class EscapeHouse {
         }
         return encontrado;
     }
+    public boolean cambiarDeHabitacion(String nombreEquipo, int codigoDestino){
+        boolean exito = false;
+        Equipo equipo = tablaEquipos.get(nombreEquipo);
+        if(equipo != null){
+            Habitacion actual = (Habitacion) tablaHabitaciones.obtener(new Habitacion(equipo.getCodigoHabitacionActual()));
+            
+        }
+
+        return exito;
+    }
 }
