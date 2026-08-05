@@ -17,7 +17,7 @@ public class GestorArchivos {
             String linea;
             while ((linea = br.readLine()) != null) {
                 linea = linea.trim();
-                // Omitir líneas vacías o comentarios
+                // se omiten las líneas vacías
                 if (linea.isEmpty() || linea.startsWith("//")) {
                     continue;
                 }
