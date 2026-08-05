@@ -209,8 +209,31 @@ public class EscapeHouse {
 
     public Lista mostrarDesafiosTipo(Habitacion h, int puntajeA, int puntajeB, String tipoX){
         Lista lista = new Lista();
-        if (h != null && puntajeA > 0 && puntajeB > puntajeA && tipoX == ){
+        int longLista = 0;
+        if (h != null && puntajeA > 0 && puntajeB > puntajeA && tipoX != null){
+            tipoX = tipoX.toLowerCase();
+            if (tipoX.equals("lógico") || tipoX.equals("matemático") || tipoX.equals("destreza") || tipoX.equals("letras") || tipoX.equals("búsqueda") || tipoX.equals("ingenio")) {
+                ArbolAVL desafiosHabitacion = h.getDesafios();
+                if (!desafiosHabitacion.vacio()){
+                    Desafio minPuntaje = new Desafio(puntajeA, h.getCodigo());
+                    Desafio maxPuntaje = new Desafio(puntajeB, h.getCodigo());
 
+                    Lista desafiosEnRango = desafiosHabitacion.listarRango(minPuntaje, maxPuntaje);
+                    if (!desafiosEnRango.esVacia()){
+                        int longitud = desafiosEnRango.longitud(); 
+                        
+                        int i = 1;
+
+                        while(i < longitud){
+                            Desafio def = (Desafio) desafiosEnRango.recuperar(i);
+                            if (def.getTipo().equalsIgnoreCase(tipoX)){
+                                lista.insertar(def, longLista+1);
+                            }
+                            i++;
+                        }
+                    }
+                }
+            }   
         }
         return lista;
     }
