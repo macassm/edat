@@ -530,7 +530,12 @@ public class Main {
                 int codigoHabitacionDesafio = scanner.nextInt();
                 System.out.println("Ingrese el puntaje del desafío: ");
                 int puntajeDesafio = scanner.nextInt();
-                System.out.println(escapeHouse.jugarDesafio(nombreEquipo3, codigoHabitacionDesafio, puntajeDesafio));
+                boolean seResolvio = escapeHouse.jugarDesafio(nombreEquipo3, codigoHabitacionDesafio, puntajeDesafio);
+                if(seResolvio){
+                    System.out.println("El desafio se resolvio correctamente");
+                }else{
+                    System.out.println("El desafio no se resolvio");
+                }
                 break;
 
             case 4:
@@ -538,7 +543,12 @@ public class Main {
                 String nombreEquipo4 = scanner.nextLine();
                 System.out.println("Ingrese el código de la habitación destino: ");
                 int codHabDestino = scanner.nextInt();
-                System.out.println(escapeHouse.cambiarDeHabitacion(nombreEquipo4, codHabDestino));
+                boolean seCambio = escapeHouse.cambiarDeHabitacion(nombreEquipo4, codHabDestino);
+                if(seCambio){
+                    System.out.println("El equipo se cambio de habitacion correctamente");
+                }else{
+                    System.out.println("El equipo no se pudo cambiar de habitacion");
+                }
                 break;
             case 5:
                 System.out.println("Ingrese el nombre del equipo: ");
