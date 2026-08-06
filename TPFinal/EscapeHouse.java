@@ -266,9 +266,10 @@ public class EscapeHouse {
     public String mostrarDesafiosTipo(int codigoHab, int puntajeA, int puntajeB, String tipoX){
         String desafios = "No se encontraron desafios que coincidan con los parámetros";
         Lista lista = new Lista();
-        Habitacion hab = (Habitacion)tablaHabitaciones.obtener(codigoHab);
+        Habitacion hab = (Habitacion)tablaHabitaciones.obtener(new Habitacion(codigoHab));
         int longLista = 0;
-        if (tablaHabitaciones.pertenece(hab) && puntajeA > 0 && puntajeB >= puntajeA && tipoX != null){
+        if(hab!=null){
+            if (puntajeA > 0 && puntajeB >= puntajeA && tipoX != null){
             tipoX = tipoX.toLowerCase();
             if (tipoX.equals("lógico") || tipoX.equals("matemático") || tipoX.equals("destreza") || tipoX.equals("letras") || tipoX.equals("búsqueda") || tipoX.equals("ingenio")) {
                 ArbolAVL desafiosHabitacion = hab.getDesafios();
@@ -297,6 +298,7 @@ public class EscapeHouse {
                 }
             }
 
+        }
         }
         return desafios;
     }
