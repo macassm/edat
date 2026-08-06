@@ -22,7 +22,6 @@ public class Main {
             System.out.print("Ingrese una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine(); 
-
             switch (opcion) {
                 case 1:
                     cargarSistemaDesdeArchivo(escapeHouse, RUTA_DATOS);
@@ -284,7 +283,13 @@ public class Main {
                     System.out.print("Ingrese el código de habitación donde está: ");
                     int habDel = scanner.nextInt();
 
-                    // eliminar desafío
+                    if (escapeHouse.eliminarDesafio(ptsDel, habDel)) {
+                        System.out.println("Desafío eliminado correctamente.");
+                        registrarEnLog("Desafío eliminado: " + ptsDel + ", " + habDel);
+                    } else {
+                        System.out.println("Error al eliminar el desafío. Verifique los datos.");
+                        registrarEnLog("Error al eliminar el desafío: " + ptsDel + ", " + habDel);
+                    }
                     break;
                 case 7:
                     System.out.print("Ingrese el código Habitación Origen: ");
@@ -445,6 +450,7 @@ public class Main {
         System.out.print("Seleccione: ");
 
         int op = scanner.nextInt();
+        scanner.nextLine();
         switch (op) {
             case 1:
                 System.out.println("Ingrese el puntaje del desafío: ");
@@ -507,6 +513,7 @@ public class Main {
         System.out.print("Seleccione: ");
 
         int op = scanner.nextInt();
+        scanner.nextLine();
         switch (op) {
             case 1:
                 System.out.println("Ingrese el nombre del equipo: ");
