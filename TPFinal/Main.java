@@ -560,6 +560,7 @@ public class Main {
                 System.out.println("Ingrese el nombre del equipo: ");
                 String nombreEquipo5 = scanner.nextLine();
                 System.out.println(escapeHouse.puedeSalir(nombreEquipo5));
+                break;
             case 0:
                 System.out.println("Volviendo al menú principal...");
                 break;
