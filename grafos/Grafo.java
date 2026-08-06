@@ -617,7 +617,7 @@ public boolean existeArco(Object desde, Object hasta) {
             NodoAdy ady = actual.getPrimerAdy();
             while (ady != null) {
                 NodoVert vecino = ady.getVertice();
-                if (!contiene(visitados, vecino.getElem())) {
+                if (!pertenece(visitados, vecino.getElem())) {
                     obtenerTodosLosCaminosAux(vecino, destino, caminoActual, caminos, visitados);
                 }
                 ady = ady.getSigAdyacente();
@@ -629,19 +629,6 @@ public boolean existeArco(Object desde, Object hasta) {
         caminoActual.eliminar(caminoActual.longitud());
     }
 
-
-    private boolean contiene(Lista lista, Object elem) {
-        boolean encontrado = false;
-        int i = 1;
-        while (i <= lista.longitud() && !encontrado) {
-            if (lista.recuperar(i).equals(elem)) {
-                encontrado = true;
-            } else {
-                i++;
-            }
-        }
-        return encontrado;
-    }
 
     public boolean modificarVertice(Object aCambiar, Object nuevoDato) {
         boolean exito = false;
