@@ -369,7 +369,7 @@ public class Main {
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
             }
-        } while (opcion != 0);
+        } while (opcion < 0 || opcion > 11);
     }
 
     private static void menuConsultasHabitaciones(EscapeHouse escapeHouse, Scanner scanner) {
@@ -439,7 +439,7 @@ public class Main {
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
             }
-        } while (op != 0);
+        } while (op < 0 || op > 5);
     
     }
 
@@ -505,7 +505,7 @@ public class Main {
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
             }
-        } while (op != 0);
+        } while (op < 0 || op >4);
         
     }
 
@@ -517,6 +517,7 @@ public class Main {
         System.out.println("3. Marcar como ganado un desafío para un equipo");
         System.out.println("4. Cambiar de habitación a un equipo");
         System.out.println("5. Verificar si un equipo puede salir del escape house");
+        System.out.println("6. Hacer salir un equipo de la casa");
         System.out.println("0. Volver");
         System.out.print("Seleccione: ");
         int op;
@@ -541,17 +542,15 @@ public class Main {
             case 3:
                 System.out.println("Ingrese el nombre del equipo: ");
                 String nombreEquipo3 = scanner.nextLine();
-                System.out.println("Ingrese el código de la habitación del desafío: ");
-                int codigoHabitacionDesafio = scanner.nextInt();
                 System.out.println("Ingrese el puntaje del desafío: ");
                 int puntajeDesafio = scanner.nextInt();
-                boolean seResolvio = escapeHouse.jugarDesafio(nombreEquipo3, codigoHabitacionDesafio, puntajeDesafio);
+                boolean seResolvio = escapeHouse.jugarDesafio(nombreEquipo3, puntajeDesafio);
                 if(seResolvio){
                     System.out.println("El desafio se resolvio correctamente");
-                    registrarEnLog("El equipo "+ nombreEquipo3 + " resolvió el desafío con puntaje " + puntajeDesafio + " de la habitación " + codigoHabitacionDesafio);
+                    registrarEnLog("El equipo "+ nombreEquipo3 + " resolvió el desafío con puntaje " + puntajeDesafio + " de la habitación");
                 }else{
                     System.out.println("El desafio no se resolvio");
-                    registrarEnLog("El equipo "+ nombreEquipo3 + " no resolvió el desafío con puntaje " + puntajeDesafio + " de la habitación " + codigoHabitacionDesafio);
+                    registrarEnLog("El equipo "+ nombreEquipo3 + " no resolvió el desafío con puntaje " + puntajeDesafio + " de la habitación");
                 }
                 break;
 
@@ -579,12 +578,23 @@ public class Main {
                     System.out.println("El equipo "+ nombreEquipo5 +" no puede salir");
                 }
                 break;
+            case 6:
+                System.out.println("ingrese el nombre del equipo");
+                String nombreEquipo6 = scanner.nextLine();
+                boolean puedeSalir = escapeHouse.puedeSalir(nombreEquipo6);
+                if(puedeSalir){
+                    escapeHouse.eliminarEquipo(nombreEquipo6);
+                    System.out.println("El equipo "+ nombreEquipo6 + " salió de la casa");
+                    registrarEnLog("El equipo "+ nombreEquipo6 + " salió de la casa");
+                }else{
+                    System.out.println("El equipo " + nombreEquipo6 + " no puede salir de la casa aún");
+                }
             case 0:
                 System.out.println("Volviendo al menú principal...");
                 break;
             default:
                 System.out.println("Opción inválida. Intente nuevamente.");
             }
-        } while (op != 0);
+        } while (op < 0 || op > 5);
     }
 }

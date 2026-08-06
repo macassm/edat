@@ -327,12 +327,12 @@ public class EscapeHouse {
         return puede;
     }
     
-    public boolean jugarDesafio(String nombreEquipo, int codigoHabitacion, int puntajeDesafio){
+    public boolean jugarDesafio(String nombreEquipo, int puntajeDesafio){
         boolean exito = false;
         Equipo equipo = tablaEquipos.get(nombreEquipo);
-        Habitacion hab = (Habitacion) tablaHabitaciones.obtener(new Habitacion(codigoHabitacion));
-        if(equipo!=null && equipo.getCodigoHabitacionActual() == codigoHabitacion && hab != null){
-            Desafio desafio = (Desafio)hab.getDesafios().obtener(new Desafio(puntajeDesafio,codigoHabitacion));
+        Habitacion hab = (Habitacion) tablaHabitaciones.obtener(new Habitacion(equipo.getCodigoHabitacionActual()));
+        if(equipo!=null && tablaHabitaciones.obtener(new Habitacion(equipo.getCodigoHabitacionActual())) != null){
+            Desafio desafio = (Desafio)hab.getDesafios().obtener(new Desafio(puntajeDesafio,equipo.getCodigoHabitacionActual()));
             if(desafio!=null){
                 if(!hab.getPuntajeEquipos().containsKey(nombreEquipo)){
                 hab.getPuntajeEquipos().put(nombreEquipo, 0);
