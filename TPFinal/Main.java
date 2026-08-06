@@ -456,8 +456,6 @@ public class Main {
         do {
             op = scanner.nextInt();
             scanner.nextLine();
-        
-            scanner.nextLine();
             switch (op) {
                 case 1:
                     System.out.println("Ingrese el puntaje del desafío: ");
@@ -493,6 +491,7 @@ public class Main {
                     int pjeMin = scanner.nextInt();
                     System.out.println("Ingrese el puntaje máximo: ");
                     int pjeMax = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.println("Ingrese el tipo de desafío: ");
                     String tipoD4 = scanner.nextLine();
                     System.out.println(escapeHouse.mostrarDesafiosTipo(codH4, pjeMin, pjeMax, tipoD4));
