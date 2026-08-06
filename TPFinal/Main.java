@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Main {
     private static final String RUTA_LOG = "log_escape_house.txt";
-    private static final String RUTA_DATOS = "datos_iniciales.txt";
+    private static final String RUTA_DATOS = "TPFinal/datos_iniciales.txt";
 
     public static void main(String[] args) {
         EscapeHouse escapeHouse = new EscapeHouse();
@@ -97,7 +97,7 @@ public class Main {
                 linea = linea.trim();
                 if (linea.isEmpty() || linea.startsWith("//")) continue;
 
-                String[] p = linea.split(";");
+                String[] p = linea.split("[;:]");
                 if (p.length == 0) continue;
 
                 String tipo = p[0].trim().toUpperCase();
@@ -182,6 +182,7 @@ public class Main {
                 case 1:
                     System.out.print("Ingrese el código habitación: ");
                     int codH = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.print("Ingrese el nombre: ");
                     String nomH = scanner.nextLine();
                     System.out.print("Ingrese la planta (número): ");

@@ -1,0 +1,89 @@
+// Archivo de carga - Escape House
+
+// Formato Habitacion: H;codigo;nombre;planta;metros;tieneSalida
+
+H;1;Altillo;3;15.5;false
+H;2;Baño;1;8.0;false
+H;3;Biblioteca;1;35.0;false
+H;4;Bodega;0;20.0;false
+H;5;Cochera;1;25.0;false
+H;6;Cocina;1;18.0;false
+H;7;Comedor;1;22.0;false
+H;8;Depósito;1;10.0;false
+H;9;Despensa;1;5.0;false
+H;10;Dormitorio principal;2;30.0;false
+H;11;Dormitorio de huéspedes;2;20.0;false
+H;12;Escalera;1;12.0;false
+H;13;Escritorio;2;15.0;false
+H;14;Gimnasio;1;40.0;false
+H;15;Invernadero;1;25.0;false
+H;16;Lavadero;1;8.5;false
+H;18;Pasillo;1;10.0;false
+H;20;Recibidor;1;12.0;true
+H;22;Sala de Juegos;2;28.0;false
+H;23;Sala de Música;2;32.0;false
+
+// Formato Puerta: P;origen;destino;puntajeExigido 
+
+P;20;18;30
+P;20;12;10
+P;18;3;20
+P;18;14;10
+P;3;13;20
+P;14;22;20
+P;12;10;5
+P;12;11;10
+P;10;23;15
+P;11;2;30
+P;2;6;20
+P;6;7;10
+P;6;9;10
+P;7;1;10
+P;1;15;20
+P;15;8;5
+P;8;16;10
+P;16;4;15
+P;4;5;10
+
+// Formato Desafio: D;puntaje;codHabitacion;nombre;tipo
+
+
+D;20;6;Preparar cafe;logico
+D;10;7;Poner la mesa rapido;destreza
+D;10;1;Resolver ecuacion;matematico
+D;10;1;Encontrar el objeto perdido;busqueda
+D;20;15;Identificar la planta venenosa;ingenio
+D;10;8;Ordenar el deposito;logico
+D;15;16;Armar rompecabezas;destreza
+D;15;4;Traducir el mensaje encriptado;letras
+D;10;5;Afinar la guitarra;ingenio
+D;10;9;Construir torre de cartas;destreza
+D;15;2;Pintar el error en el cuadro;destreza
+D;15;2;Resolver acertijo de cruzar un río con lobo y oveja;logico
+D;20;11;Encontrar las diferencias entre fotos;busqueda
+D;10;11;Evitar jaque mate;logico
+D;10;12;Esquivar los escalones rotos;destreza
+D;15;10;Llevar agua con una hoja de papel;ingenio
+D;15;23;Lograr comunicarse a traves de un vidrio sin sonido;ingenio
+D;15;20;Descifrar el candado final;matematico
+D;15;20;Replicar origami;destreza
+D;15;18;Resolver un perimetro;matematico
+D;15;18;Encontrar la llave maestra;busqueda
+D;20;14;Encestar pelota;destreza
+D;20;22;Reconocer el impostor;logico
+D;10;3;Aprobar el parcial de Estructuras de Datos;logico
+D;10;3;Buscar el manual del Arbol AVL;busqueda
+D;20;13;Hacer correr doom en un termometro digital;ingenio
+
+// Formato Equipo: E;nombre;puntajeExigido;puntajeTotal;habActual;puntajeHab
+// (Todos inician en la habitación 6 con 0 puntos, exigiendo 150)
+E;Los Compiladores;150;0;6;0
+E;Cafeinados;150;0;6;0
+E;Fanaticos de los panchos;150;0;6;0
+E;Skidush;150;0;6;0
+E;Club del ajedrez;150;0;6;0
+E;Fanaticos de Linux;150;0;6;0
+E;Estructurados;150;0;6;0
+E;Otakus;150;0;6;0
+E;Los 4 Fantasticos;150;0;6;0
+E;GrupoA;150;0;6;0
