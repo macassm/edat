@@ -270,7 +270,7 @@ public class EscapeHouse {
         Habitacion hab = (Habitacion)tablaHabitaciones.obtener(new Habitacion(codigoHab));
         int longLista = 0;
         if(hab!=null){
-            if (puntajeA > 0 && puntajeB >= puntajeA && tipoX != null){
+            if (puntajeA >= 0 && puntajeB >= puntajeA && tipoX != null){
             tipoX = tipoX.toLowerCase();
             if (tipoX.equals("logico") || tipoX.equals("matematico") || tipoX.equals("destreza") || tipoX.equals("letras") || tipoX.equals("busqueda") || tipoX.equals("ingenio")) {
                 ArbolAVL desafiosHabitacion = hab.getDesafios();
