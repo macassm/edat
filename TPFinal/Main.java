@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Main {
     private static final String RUTA_LOG = "log_escape_house.txt";
-    private static final String RUTA_DATOS = "datos_iniciales.txt";
+    private static final String RUTA_DATOS = "TPFinal/datos_iniciales.txt";
 
     public static void main(String[] args) {
         EscapeHouse escapeHouse = new EscapeHouse();
@@ -96,7 +96,7 @@ public class Main {
                 linea = linea.trim();
                 if (linea.isEmpty() || linea.startsWith("//")) continue;
 
-                String[] p = linea.split(";");
+                String[] p = linea.split("[;:]");
                 if (p.length == 0) continue;
 
                 String tipo = p[0].trim().toUpperCase();
@@ -283,7 +283,13 @@ public class Main {
                     System.out.print("Ingrese el código de habitación donde está: ");
                     int habDel = scanner.nextInt();
 
-                    // eliminar desafío
+                    if (escapeHouse.eliminarDesafio(ptsDel, habDel)) {
+                        System.out.println("Desafío eliminado correctamente.");
+                        registrarEnLog("Desafío eliminado: " + ptsDel + ", " + habDel);
+                    } else {
+                        System.out.println("Error al eliminar el desafío. Verifique los datos.");
+                        registrarEnLog("Error al eliminar el desafío: " + ptsDel + ", " + habDel);
+                    }
                     break;
                 case 7:
                     System.out.print("Ingrese el código Habitación Origen: ");
