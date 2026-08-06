@@ -135,23 +135,24 @@ public class EscapeHouse {
         return valido;
     }
 
-    public boolean eliminarDesafio(Desafio d){
+    public boolean eliminarDesafio(int puntaje, int codHabitacion){
         boolean valido = false;
-        if (d != null){
-            //guardamos si existía el desafío en la base de datos de Desafíos
-            boolean desafioEliminado = tablaDesafios.eliminar(d);
-            if (desafioEliminado){
-                //creamos una habitacion liviana y la buscamos para poder borrar el desafio de su arbol interno
-                Habitacion habAux = new Habitacion(d.getCodigoHabitacion());
-                Habitacion hab = (Habitacion) tablaHabitaciones.obtener(habAux);
-                //Si estaba la habitacion, eliminamos el desafío
-                if (hab != null){
-                    hab.getDesafios().eliminar(d);
-                }
-                //como se borró de la base de datos de la casa, fue válido el borrado
-                valido = true;
+        //creamos un desafio liviano para usarlo como señuelo
+        Desafio desAux = new Desafio(puntaje, codHabitacion);
+        //lo intentamos borrar de la tabla globar
+        boolean desafioEliminado = tablaDesafios.eliminar(desAux);
+        //verificamos el resultado
+        if(desafioEliminado){
+            //Creamos una habitacion liviana para buscarla
+            Habitacion habAux = new Habitacion(codHabitacion);
+            Habitacion hab = (Habitacion) tablaHabitaciones.obtener(habAux);
+            //si se encontró, eliminamos el desafio de su lista de desafios
+            if (hab != null){
+                hab.getDesafios().eliminar(desAux);
             }
-        }
+            //como se borró de la global, validamos
+            valido = true;
+        }        
         return valido;
     }
 
