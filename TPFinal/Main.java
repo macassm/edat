@@ -457,7 +457,6 @@ public class Main {
             op = scanner.nextInt();
             scanner.nextLine();
         
-            scanner.nextLine();
             switch (op) {
                 case 1:
                     System.out.println("Ingrese el puntaje del desafío: ");
