@@ -39,7 +39,7 @@ public class Grafo {
 
         if (auxDesde != null && auxHasta != null) {
             boolean insertadoIda = insertarAdyacente(auxDesde, auxHasta, etiqueta);
-            boolean insertadoVuelta = insertarAdyacente(auxHasta, auxDesde, etiqueta);
+            boolean insertadoVuelta = insertarAdyacente(auxHasta, auxDesde, 0);
             if(insertadoIda && insertadoVuelta){
                 logrado = true;
             }
