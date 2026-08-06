@@ -64,7 +64,15 @@ public class Desafio implements Comparable<Desafio>{
     }
    @Override
     public int compareTo(Desafio otro) {
-        return Integer.compare(this.puntaje, otro.puntaje);
+        // Comparamos si los puntajes son iguales
+        int resultado = Integer.compare(this.puntaje, otro.puntaje);
+        
+        // Si el puntaje es exactamente igual, desempatamos por habitación
+        if (resultado == 0) {
+            resultado = Integer.compare(this.codigoHabitacion, otro.codigoHabitacion);
+        }
+        
+        return resultado;
     }
  
     @Override
