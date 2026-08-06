@@ -244,26 +244,28 @@ public class EscapeHouse {
     }
 
     //quitamos el parámetro de habitación porque consideramos que no era necesario para hacer la consulta
-    public boolean verificarDesafioResuelto(Equipo eq, Desafio de){
+    public boolean verificarDesafioResuelto(String eq, int puntaje, int codHabitacion){
         boolean resuelto = false;
-        if(eq != null && de != null && desafiosResueltosPorEquipo.containsKey(eq.getNombre())){
-            Lista resueltos = desafiosResueltosPorEquipo.get(eq.getNombre());
+        Desafio de = new Desafio(puntaje, codHabitacion);
+        if(desafiosResueltosPorEquipo.containsKey(eq)){
+            Lista resueltos = desafiosResueltosPorEquipo.get(eq);
             resuelto = (resueltos.localizar(de) > 0);
         }
         return resuelto;
     }
 
-    public String mostrarDesafiosTipo(Habitacion h, int puntajeA, int puntajeB, String tipoX){
+    public String mostrarDesafiosTipo(int codigoHab, int puntajeA, int puntajeB, String tipoX){
         String desafios = "No se encontraron desafios que coincidan con los parámetros";
         Lista lista = new Lista();
+        Habitacion hab = (Habitacion)tablaHabitaciones.obtener(codigoHab);
         int longLista = 0;
-        if (h != null && puntajeA > 0 && puntajeB >= puntajeA && tipoX != null){
+        if (tablaHabitaciones.pertenece(hab) && puntajeA > 0 && puntajeB >= puntajeA && tipoX != null){
             tipoX = tipoX.toLowerCase();
             if (tipoX.equals("lógico") || tipoX.equals("matemático") || tipoX.equals("destreza") || tipoX.equals("letras") || tipoX.equals("búsqueda") || tipoX.equals("ingenio")) {
-                ArbolAVL desafiosHabitacion = h.getDesafios();
+                ArbolAVL desafiosHabitacion = hab.getDesafios();
                 if (!desafiosHabitacion.vacio()){
-                    Desafio minPuntaje = new Desafio(puntajeA, h.getCodigo());
-                    Desafio maxPuntaje = new Desafio(puntajeB, h.getCodigo());
+                    Desafio minPuntaje = new Desafio(puntajeA, codigoHab);
+                    Desafio maxPuntaje = new Desafio(puntajeB, codigoHab);
 
                     Lista desafiosEnRango = desafiosHabitacion.listarRango(minPuntaje, maxPuntaje);
                     if (!desafiosEnRango.esVacia()){
@@ -325,7 +327,7 @@ public class EscapeHouse {
                 }
                 int puntajeActual = hab.getPuntajeEquipos().get(nombreEquipo);
                 Lista lista = desafiosResueltosPorEquipo.get(nombreEquipo);
-            if(!verificarDesafioResuelto(equipo, desafio)){
+            if(!verificarDesafioResuelto(equipo.getNombre(), desafio.getPuntaje(), desafio.getCodigoHabitacion())){
                 lista.insertar(desafio,lista.longitud()+1 );
                 equipo.setPuntajeActualEnHabitacion(puntajeActual+puntajeDesafio);
                 hab.getPuntajeEquipos().put(nombreEquipo, puntajeActual + puntajeDesafio);
@@ -373,7 +375,7 @@ public class EscapeHouse {
             info = "Desafios posibles: ";
             for(int i = 1; i <= desafios.longitud(); i++){
                 Desafio d = (Desafio) desafios.recuperar(i);
-                if(!verificarDesafioResuelto(equipo, d) && equipo.getPuntajeActualEnHabitacion()+d.getPuntaje() >= puntajeRequerido ){  // no resuelto por el equipo, Y que solo alcance
+                if(!verificarDesafioResuelto(equipo.getNombre(), d.getPuntaje(), d.getCodigoHabitacion()) && equipo.getPuntajeActualEnHabitacion()+d.getPuntaje() >= puntajeRequerido ){  // no resuelto por el equipo, Y que solo alcance
                     info += "\n "+ d.getNombre() + " Tipo: " + d.getTipo() + " Puntaje: "+d.getPuntaje();
                 }
             }
