@@ -1,0 +1,148 @@
+--- CARGA INICIAL FINALIZADA ---
+=== Grafo (plano de la casa) ===
+
+Vertice: 23 [10,15;]
+Vertice: 22 [14,20;]
+Vertice: 20 [18,30;12,10;]
+Vertice: 18 [20,30;3,20;14,10;]
+Vertice: 16 [8,10;4,15;]
+Vertice: 15 [1,20;8,5;]
+Vertice: 14 [18,10;22,20;]
+Vertice: 13 [3,20;]
+Vertice: 12 [20,10;10,5;11,10;]
+Vertice: 11 [12,10;2,30;]
+Vertice: 10 [12,5;23,15;]
+Vertice: 9 [6,10;]
+Vertice: 8 [15,5;16,10;]
+Vertice: 7 [6,10;1,10;]
+Vertice: 6 [2,20;7,10;9,10;]
+Vertice: 5 [4,10;]
+Vertice: 4 [16,15;5,10;]
+Vertice: 3 [18,20;13,20;]
+Vertice: 2 [11,30;6,20;]
+Vertice: 1 [7,10;15,20;]
+=== Habitaciones (AVL) ===
+Habitacion 8 - Nombre: Depósito - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false -> Altura: 4 -> HI: Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false HD: Habitacion 16 - Nombre: Lavadero - Planta: 1 - Superficie: 8.5m2 - Tiene salida: false
+Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false -> Altura: 2 -> HI: Habitacion 2 - Nombre: Baño - Planta: 1 - Superficie: 8.0m2 - Tiene salida: false HD: Habitacion 6 - Nombre: Cocina - Planta: 1 - Superficie: 18.0m2 - Tiene salida: false
+Habitacion 2 - Nombre: Baño - Planta: 1 - Superficie: 8.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 1 - Nombre: Altillo - Planta: 3 - Superficie: 15.5m2 - Tiene salida: false HD: Habitacion 3 - Nombre: Biblioteca - Planta: 1 - Superficie: 35.0m2 - Tiene salida: false
+Habitacion 1 - Nombre: Altillo - Planta: 3 - Superficie: 15.5m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 3 - Nombre: Biblioteca - Planta: 1 - Superficie: 35.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 6 - Nombre: Cocina - Planta: 1 - Superficie: 18.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 5 - Nombre: Cochera - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false HD: Habitacion 7 - Nombre: Comedor - Planta: 1 - Superficie: 22.0m2 - Tiene salida: false
+Habitacion 5 - Nombre: Cochera - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 7 - Nombre: Comedor - Planta: 1 - Superficie: 22.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 16 - Nombre: Lavadero - Planta: 1 - Superficie: 8.5m2 - Tiene salida: false -> Altura: 3 -> HI: Habitacion 12 - Nombre: Escalera - Planta: 1 - Superficie: 12.0m2 - Tiene salida: false HD: Habitacion 20 - Nombre: Recibidor - Planta: 1 - Superficie: 12.0m2 - Tiene salida: true
+Habitacion 12 - Nombre: Escalera - Planta: 1 - Superficie: 12.0m2 - Tiene salida: false -> Altura: 2 -> HI: Habitacion 10 - Nombre: Dormitorio principal - Planta: 2 - Superficie: 30.0m2 - Tiene salida: false HD: Habitacion 14 - Nombre: Gimnasio - Planta: 1 - Superficie: 40.0m2 - Tiene salida: false
+Habitacion 10 - Nombre: Dormitorio principal - Planta: 2 - Superficie: 30.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 9 - Nombre: Despensa - Planta: 1 - Superficie: 5.0m2 - Tiene salida: false HD: Habitacion 11 - Nombre: Dormitorio de huéspedes - Planta: 2 - Superficie: 20.0m2 - Tiene salida: false
+Habitacion 9 - Nombre: Despensa - Planta: 1 - Superficie: 5.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 11 - Nombre: Dormitorio de huéspedes - Planta: 2 - Superficie: 20.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 14 - Nombre: Gimnasio - Planta: 1 - Superficie: 40.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 13 - Nombre: Escritorio - Planta: 2 - Superficie: 15.0m2 - Tiene salida: false HD: Habitacion 15 - Nombre: Invernadero - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false
+Habitacion 13 - Nombre: Escritorio - Planta: 2 - Superficie: 15.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 15 - Nombre: Invernadero - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 20 - Nombre: Recibidor - Planta: 1 - Superficie: 12.0m2 - Tiene salida: true -> Altura: 2 -> HI: Habitacion 18 - Nombre: Pasillo - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false HD: Habitacion 22 - Nombre: Sala de Juegos - Planta: 2 - Superficie: 28.0m2 - Tiene salida: false
+Habitacion 18 - Nombre: Pasillo - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 22 - Nombre: Sala de Juegos - Planta: 2 - Superficie: 28.0m2 - Tiene salida: false -> Altura: 1 -> HI: N/A HD: Habitacion 23 - Nombre: Sala de Música - Planta: 2 - Superficie: 32.0m2 - Tiene salida: false
+Habitacion 23 - Nombre: Sala de Música - Planta: 2 - Superficie: 32.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+
+=== Desafios por habitacion ===
+Habitacion 1:
+Habitacion 2:
+Habitacion 3:
+Habitacion 4:
+Habitacion 5:
+Habitacion 6:
+Desafio: Preparar cafe Puntaje:20 Habitacion:6 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 7:
+Desafio: Poner la mesa rapido Puntaje:10 Habitacion:7 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 8:
+Habitacion 9:
+Habitacion 10:
+Habitacion 11:
+Habitacion 12:
+Habitacion 13:
+Habitacion 14:
+Habitacion 15:
+Habitacion 16:
+Desafio: Armar rompecabezas Puntaje:15 Habitacion:16 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 18:
+Habitacion 20:
+Habitacion 22:
+Habitacion 23:
+
+=== Equipos (Hash) ===
+{Los 4 Fantasticos=Equipo: Los 4 Fantasticos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Estructurados=Equipo: Estructurados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Otakus=Equipo: Otakus Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Cafeinados=Equipo: Cafeinados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Skidush=Equipo: Skidush Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Club del ajedrez=Equipo: Club del ajedrez Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de Linux=Equipo: Fanaticos de Linux Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, GrupoA=Equipo: GrupoA Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Los Compiladores=Equipo: Los Compiladores Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de los panchos=Equipo: Fanaticos de los panchos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0}
+=== Desafios resueltos por equipo (Hash) ===
+{Los 4 Fantasticos=[  ], Estructurados=[  ], Otakus=[  ], Cafeinados=[  ], Skidush=[  ], Club del ajedrez=[  ], Fanaticos de Linux=[  ], GrupoA=[  ], Los Compiladores=[  ], Fanaticos de los panchos=[  ]}
+--- CARGA INICIAL FINALIZADA ---
+=== Grafo (plano de la casa) ===
+
+Vertice: 23 [10,15;]
+Vertice: 22 [14,20;]
+Vertice: 20 [18,30;12,10;]
+Vertice: 18 [20,30;3,20;14,10;]
+Vertice: 16 [8,10;4,15;]
+Vertice: 15 [1,20;8,5;]
+Vertice: 14 [18,10;22,20;]
+Vertice: 13 [3,20;]
+Vertice: 12 [20,10;10,5;11,10;]
+Vertice: 11 [12,10;2,30;]
+Vertice: 10 [12,5;23,15;]
+Vertice: 9 [6,10;]
+Vertice: 8 [15,5;16,10;]
+Vertice: 7 [6,10;1,10;]
+Vertice: 6 [2,20;7,10;9,10;]
+Vertice: 5 [4,10;]
+Vertice: 4 [16,15;5,10;]
+Vertice: 3 [18,20;13,20;]
+Vertice: 2 [11,30;6,20;]
+Vertice: 1 [7,10;15,20;]
+=== Habitaciones (AVL) ===
+Habitacion 8 - Nombre: Depósito - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false -> Altura: 4 -> HI: Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false HD: Habitacion 16 - Nombre: Lavadero - Planta: 1 - Superficie: 8.5m2 - Tiene salida: false
+Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false -> Altura: 2 -> HI: Habitacion 2 - Nombre: Baño - Planta: 1 - Superficie: 8.0m2 - Tiene salida: false HD: Habitacion 6 - Nombre: Cocina - Planta: 1 - Superficie: 18.0m2 - Tiene salida: false
+Habitacion 2 - Nombre: Baño - Planta: 1 - Superficie: 8.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 1 - Nombre: Altillo - Planta: 3 - Superficie: 15.5m2 - Tiene salida: false HD: Habitacion 3 - Nombre: Biblioteca - Planta: 1 - Superficie: 35.0m2 - Tiene salida: false
+Habitacion 1 - Nombre: Altillo - Planta: 3 - Superficie: 15.5m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 3 - Nombre: Biblioteca - Planta: 1 - Superficie: 35.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 6 - Nombre: Cocina - Planta: 1 - Superficie: 18.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 5 - Nombre: Cochera - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false HD: Habitacion 7 - Nombre: Comedor - Planta: 1 - Superficie: 22.0m2 - Tiene salida: false
+Habitacion 5 - Nombre: Cochera - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 7 - Nombre: Comedor - Planta: 1 - Superficie: 22.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 16 - Nombre: Lavadero - Planta: 1 - Superficie: 8.5m2 - Tiene salida: false -> Altura: 3 -> HI: Habitacion 12 - Nombre: Escalera - Planta: 1 - Superficie: 12.0m2 - Tiene salida: false HD: Habitacion 20 - Nombre: Recibidor - Planta: 1 - Superficie: 12.0m2 - Tiene salida: true
+Habitacion 12 - Nombre: Escalera - Planta: 1 - Superficie: 12.0m2 - Tiene salida: false -> Altura: 2 -> HI: Habitacion 10 - Nombre: Dormitorio principal - Planta: 2 - Superficie: 30.0m2 - Tiene salida: false HD: Habitacion 14 - Nombre: Gimnasio - Planta: 1 - Superficie: 40.0m2 - Tiene salida: false
+Habitacion 10 - Nombre: Dormitorio principal - Planta: 2 - Superficie: 30.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 9 - Nombre: Despensa - Planta: 1 - Superficie: 5.0m2 - Tiene salida: false HD: Habitacion 11 - Nombre: Dormitorio de huéspedes - Planta: 2 - Superficie: 20.0m2 - Tiene salida: false
+Habitacion 9 - Nombre: Despensa - Planta: 1 - Superficie: 5.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 11 - Nombre: Dormitorio de huéspedes - Planta: 2 - Superficie: 20.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 14 - Nombre: Gimnasio - Planta: 1 - Superficie: 40.0m2 - Tiene salida: false -> Altura: 1 -> HI: Habitacion 13 - Nombre: Escritorio - Planta: 2 - Superficie: 15.0m2 - Tiene salida: false HD: Habitacion 15 - Nombre: Invernadero - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false
+Habitacion 13 - Nombre: Escritorio - Planta: 2 - Superficie: 15.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 15 - Nombre: Invernadero - Planta: 1 - Superficie: 25.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 20 - Nombre: Recibidor - Planta: 1 - Superficie: 12.0m2 - Tiene salida: true -> Altura: 2 -> HI: Habitacion 18 - Nombre: Pasillo - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false HD: Habitacion 22 - Nombre: Sala de Juegos - Planta: 2 - Superficie: 28.0m2 - Tiene salida: false
+Habitacion 18 - Nombre: Pasillo - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 22 - Nombre: Sala de Juegos - Planta: 2 - Superficie: 28.0m2 - Tiene salida: false -> Altura: 1 -> HI: N/A HD: Habitacion 23 - Nombre: Sala de Música - Planta: 2 - Superficie: 32.0m2 - Tiene salida: false
+Habitacion 23 - Nombre: Sala de Música - Planta: 2 - Superficie: 32.0m2 - Tiene salida: false -> Altura: 0 -> HI: N/A HD: N/A
+
+=== Desafios por habitacion ===
+Habitacion 1:
+Habitacion 2:
+Habitacion 3:
+Habitacion 4:
+Habitacion 5:
+Habitacion 6:
+Desafio: Preparar cafe Puntaje:20 Habitacion:6 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 7:
+Desafio: Poner la mesa rapido Puntaje:10 Habitacion:7 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 8:
+Habitacion 9:
+Habitacion 10:
+Habitacion 11:
+Habitacion 12:
+Habitacion 13:
+Habitacion 14:
+Habitacion 15:
+Habitacion 16:
+Desafio: Armar rompecabezas Puntaje:15 Habitacion:16 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
+Habitacion 18:
+Habitacion 20:
+Habitacion 22:
+Habitacion 23:
+
+=== Equipos (Hash) ===
+{Los 4 Fantasticos=Equipo: Los 4 Fantasticos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Estructurados=Equipo: Estructurados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Otakus=Equipo: Otakus Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Cafeinados=Equipo: Cafeinados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Skidush=Equipo: Skidush Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Club del ajedrez=Equipo: Club del ajedrez Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de Linux=Equipo: Fanaticos de Linux Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, GrupoA=Equipo: GrupoA Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Los Compiladores=Equipo: Los Compiladores Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de los panchos=Equipo: Fanaticos de los panchos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0}
+=== Desafios resueltos por equipo (Hash) ===
+{Los 4 Fantasticos=[  ], Estructurados=[  ], Otakus=[  ], Cafeinados=[  ], Skidush=[  ], Club del ajedrez=[  ], Fanaticos de Linux=[  ], GrupoA=[  ], Los Compiladores=[  ], Fanaticos de los panchos=[  ]}
