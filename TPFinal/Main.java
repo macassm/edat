@@ -587,12 +587,13 @@ public class Main {
                 }else{
                     System.out.println("El equipo " + nombreEquipo6 + " no puede salir de la casa aún");
                 }
+                break;
             case 0:
                 System.out.println("Volviendo al menú principal...");
                 break;
             default:
                 System.out.println("Opción inválida. Intente nuevamente.");
             }
-        } while (op < 0 || op > 5);
+        } while (op < 0 || op > 6);
     }
 }
