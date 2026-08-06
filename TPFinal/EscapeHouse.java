@@ -13,7 +13,6 @@ public class EscapeHouse {
 
     //variables que guardan cual es la entrada y salida de la casa.
     private int idHabitacionEntrada = -1;
-    private int idHabitacionSalida = -1;
 
     public EscapeHouse(){
         this.planoCasa = new Grafo();
@@ -51,10 +50,20 @@ public class EscapeHouse {
     }
     public boolean eliminarHabitacion(int codigoHabitacion){
         boolean valido = false;
-        if (codigoHabitacion != this.idHabitacionEntrada && codigoHabitacion != this.idHabitacionSalida && tablaHabitaciones.pertenece(new Habitacion(codigoHabitacion))){
-            tablaHabitaciones.eliminar(new Habitacion(codigoHabitacion)); //se elimina la habitacion de la base de datos
-            planoCasa.eliminarVertice(codigoHabitacion); //se elimina la habitacion de la casa con sus puertas
-            valido = true;
+        Habitacion hab = (Habitacion)tablaHabitaciones.obtener(new Habitacion(codigoHabitacion));
+        if (hab!=null && codigoHabitacion != this.idHabitacionEntrada && !hab.isTieneSalida()){
+            boolean tieneEquipo = false;
+            for(Equipo equipo : tablaEquipos.values()){
+                if(equipo.getCodigoHabitacionActual() == codigoHabitacion){
+                    tieneEquipo = true;
+                }
+            }
+            if(!tieneEquipo){
+                tablaHabitaciones.eliminar(new Habitacion(codigoHabitacion)); //se elimina la habitacion de la base de datos
+                planoCasa.eliminarVertice(codigoHabitacion); //se elimina la habitacion de la casa con sus puertas
+                valido = true;
+            }
+            
         }
         return valido;
     }
