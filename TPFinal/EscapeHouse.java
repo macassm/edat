@@ -292,7 +292,7 @@ public class EscapeHouse {
 
         //consulta sobre equipos
     public String mostrarInfoEquipos(String nombreEq){
-        String info = "No se encontró un equipo con el nombre " + nombreEq;
+        String info = "No se encontro un equipo con el nombre " + nombreEq;
         if (nombreEq != null && tablaEquipos.containsKey(nombreEq)){
             info = tablaEquipos.get(nombreEq).toString() + "\nDesafios resueltos:\n" + desafiosResueltosPorEquipo.get(nombreEq).toString();
         }
