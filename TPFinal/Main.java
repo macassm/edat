@@ -180,13 +180,13 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Código habitación: ");
+                    System.out.print("Ingrese el código habitación: ");
                     int codH = scanner.nextInt();
-                    System.out.print("Nombre: ");
+                    System.out.print("Ingrese el nombre: ");
                     String nomH = scanner.nextLine();
-                    System.out.print("Planta (número): ");
+                    System.out.print("Ingrese la planta (número): ");
                     int planta = scanner.nextInt();
-                    System.out.print("Superficie (m2): ");
+                    System.out.print("Ingrese la superficie (m2): ");
                     double mts = scanner.nextDouble();
                     System.out.print("¿Tiene salida al exterior? (true/false): ");
                     boolean tieneSalida = scanner.nextBoolean();
@@ -205,14 +205,14 @@ public class Main {
 
                     break;
                 case 2:
-                    System.out.print("Código de habitación a modificar: ");
+                    System.out.print("Ingrese el código de habitación a modificar: ");
                     int codModH = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Nuevo Nombre: ");
+                    System.out.print("Ingrese el nuevo nombre: ");
                     String nNombre = scanner.nextLine();
-                    System.out.print("Nueva Planta: ");
+                    System.out.print("Ingrese la nueva planta: ");
                     int nPlanta = scanner.nextInt();
-                    System.out.print("Nuevos Metros Cuadrados: ");
+                    System.out.print("Ingrese los nuevos metros cuadrados: ");
                     double nMts = scanner.nextDouble();
 
                     if (escapeHouse.modificarHabitacion(nNombre, nPlanta, nMts, codModH)) {
@@ -225,7 +225,7 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.print("Código de habitación a eliminar: ");
+                    System.out.print("Ingrese el código de habitación a eliminar: ");
                     int codElimH = scanner.nextInt();
                     if (escapeHouse.eliminarHabitacion(codElimH)){
                         System.out.println("Habitación eliminada correctamente.");
@@ -236,14 +236,14 @@ public class Main {
                     }
                     break;
                 case 4:
-                    System.out.print("Puntaje del desafío: ");
+                    System.out.print("Ingrese el puntaje del desafío: ");
                     int pjeD = scanner.nextInt();
-                    System.out.print("Código de habitación asignada: ");
+                    System.out.print("Ingrese el código de habitación asignada: ");
                     int habD = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Nombre del desafío: ");
+                    System.out.print("Ingrese el nombre del desafío: ");
                     String nomD = scanner.nextLine();
-                    System.out.print("Tipo del desafío (lógico, matemático, búsqueda, destreza, ingenio): ");
+                    System.out.print("Ingrese el tipo del desafío (lógico, matemático, búsqueda, destreza, ingenio): ");
                     String tipoD = scanner.nextLine();
 
                     Desafio nuevoD = new Desafio(pjeD, habD, nomD, tipoD);
@@ -259,13 +259,14 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.println("Puntaje del desafío a modificar: ");
+                    System.out.print("Ingrese el puntaje del desafío a modificar: ");
                     int pjeModD = scanner.nextInt();
-                    System.out.print("Código de habitación donde está: ");
+                    System.out.print("Ingrese el código de habitación donde está: ");
                     int habModD = scanner.nextInt();
-                    System.out.print("Nuevo nombre del desafío: ");
+                    scanner.nextLine();
+                    System.out.print("Ingrese el nuevo nombre del desafío: ");
                     String nuevoNomD = scanner.nextLine();
-                    System.out.print("Nuevo tipo del desafío: ");
+                    System.out.print("Ingrese el nuevo tipo del desafío: ");
                     String nuevoTipoD = scanner.nextLine();
                     if (escapeHouse.modificarDesafio(nuevoNomD, nuevoTipoD, pjeModD, habModD)) {
                         System.out.println("Desafío modificado correctamente.");
@@ -277,19 +278,19 @@ public class Main {
 
                     break;
                 case 6:
-                    System.out.print("Puntaje del desafío a eliminar: ");
+                    System.out.print("Ingrese el puntaje del desafío a eliminar: ");
                     int ptsDel = scanner.nextInt();
-                    System.out.print("Código de habitación donde está: ");
+                    System.out.print("Ingrese el código de habitación donde está: ");
                     int habDel = scanner.nextInt();
 
                     // eliminar desafío
                     break;
                 case 7:
-                    System.out.print("Código Habitación Origen: ");
+                    System.out.print("Ingrese el código Habitación Origen: ");
                     int hOrigen = scanner.nextInt();
-                    System.out.print("Código Habitación Destino: ");
+                    System.out.print("Ingrese el código Habitación Destino: ");
                     int hDestino = scanner.nextInt();
-                    System.out.print("Puntaje exigido para pasar: ");
+                    System.out.print("Ingrese el puntaje exigido para pasar: ");
                     int ptsPuerta = scanner.nextInt();
 
                     if (escapeHouse.insertarPuerta(hOrigen, hDestino, ptsPuerta)) {
@@ -303,9 +304,9 @@ public class Main {
                     break;
 
                 case 8:
-                    System.out.print("Código Habitación Origen: ");
+                    System.out.print("Ingrese el código Habitación Origen: ");
                     hOrigen = scanner.nextInt();
-                    System.out.print("Código Habitación Destino: ");
+                    System.out.print("Ingrese el código Habitación Destino: ");
                     hDestino = scanner.nextInt();
 
                     if(escapeHouse.eliminarPuerta(hOrigen, hDestino)) {
@@ -318,9 +319,9 @@ public class Main {
 
                     break;
                 case 9:
-                    System.out.print("Nombre del Equipo: ");
+                    System.out.print("Ingrese el nombre del equipo: ");
                     String nomEq = scanner.nextLine();
-                    System.out.print("Puntaje Exigido para salir: ");
+                    System.out.print("Ingrese el puntaje exigido para salir: ");
                     int ptsExigidos = scanner.nextInt();
 
                     Equipo nuevoEq = new Equipo(nomEq, ptsExigidos, 0, -1, 0);
@@ -335,9 +336,9 @@ public class Main {
                     
                     break;
                 case 10:
-                    System.out.print("Nombre del equipo a modificar: ");
+                    System.out.print("Ingrese el nombre del equipo a modificar: ");
                     String nomEqMod = scanner.nextLine();
-                    System.out.print("Nuevo puntaje exigido para salir: ");
+                    System.out.print("Ingrese el nuevo puntaje exigido para salir: ");
                     int nuevoPtsExigidos = scanner.nextInt();
                     if(escapeHouse.modificarEquipo(nomEqMod, nuevoPtsExigidos)) {
                         System.out.println("Equipo modificado correctamente.");
@@ -348,7 +349,7 @@ public class Main {
                     }
                     break;
                 case 11:
-                    System.out.println("Nombre del equipo a eliminar: ");
+                    System.out.print("Ingrese el nombre del equipo a eliminar: ");
                     String nomEqElim = scanner.nextLine();
                     if (escapeHouse.eliminarEquipo(nomEqElim)) {
                         System.out.println("Equipo eliminado correctamente.");
@@ -483,7 +484,7 @@ public class Main {
                 System.out.println(escapeHouse.mostrarDesafiosTipo(codH4, pjeMin, pjeMax, tipoD4));
 
                 break;
-                
+
             case 0:
                 System.out.println("Volviendo al menú principal...");
                 break;
