@@ -22,7 +22,6 @@ public class Main {
             System.out.print("Ingrese una opción: ");
             opcion = scanner.nextInt();
             scanner.nextLine(); 
-
             switch (opcion) {
                 case 1:
                     cargarSistemaDesdeArchivo(escapeHouse, RUTA_DATOS);
@@ -182,6 +181,7 @@ public class Main {
                 case 1:
                     System.out.print("Ingrese el código habitación: ");
                     int codH = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.print("Ingrese el nombre: ");
                     String nomH = scanner.nextLine();
                     System.out.print("Ingrese la planta (número): ");
@@ -444,6 +444,7 @@ public class Main {
         System.out.print("Seleccione: ");
 
         int op = scanner.nextInt();
+        scanner.nextLine();
         switch (op) {
             case 1:
                 System.out.println("Ingrese el puntaje del desafío: ");
@@ -506,6 +507,7 @@ public class Main {
         System.out.print("Seleccione: ");
 
         int op = scanner.nextInt();
+        scanner.nextLine();
         switch (op) {
             case 1:
                 System.out.println("Ingrese el nombre del equipo: ");
