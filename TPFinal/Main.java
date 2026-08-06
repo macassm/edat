@@ -188,11 +188,9 @@ public class Main {
                     int planta = scanner.nextInt();
                     System.out.print("Ingrese la superficie (m2): ");
                     double mts = scanner.nextDouble();
-                    System.out.print("¿Tiene salida al exterior? (true/false): ");
-                    boolean tieneSalida = scanner.nextBoolean();
                     scanner.nextLine(); 
 
-                    Habitacion nuevaHab = new Habitacion(codH, nomH, planta, mts, tieneSalida);
+                    Habitacion nuevaHab = new Habitacion(codH, nomH, planta, mts, false);
 
                     if (escapeHouse.insertarHabitacion(nuevaHab)){
                         System.out.println("Se agregó la habitación correctamente.");
@@ -384,59 +382,64 @@ public class Main {
         System.out.println("0. Volver");
         System.out.print("Seleccione: ");
 
-        int op = scanner.nextInt();
-        switch (op) {
-            case 1:
-                System.out.print("Ingrese el código de la habitación: ");
-                int c1 = scanner.nextInt();
-                System.out.println(escapeHouse.mostrarHabitacion(c1));
-                break;
-            case 2:
-                System.out.print("Ingrese el código de la habitación: ");
-                int c2 = scanner.nextInt();
-                System.out.println(escapeHouse.habitacionesContiguas(c2));
-                break;
-            case 3:
-                System.out.print("Ingrese el código de la habitación de origen: ");
-                int hO = scanner.nextInt();
-                System.out.print("Ingrese el código de la habitación de destino: ");
-                int hD = scanner.nextInt();
-                System.out.print("Ingrese la cantidad de puntos: ");
-                int k = scanner.nextInt();
-                boolean sePuede = escapeHouse.esPosibleLlegar(hO, hD, k);
-                if (sePuede) {
-                    System.out.println("Es posible llegar de la habitación " + hO + " a la habitación " + hD + " con " + k + " puntos.");
-                } else {
-                    System.out.println("No es posible llegar de la habitación " + hO + " a la habitación " + hD + " con " + k + " puntos.");
-                }
-                break;
+        int op;
+        do {
+            op = scanner.nextInt();
+            scanner.nextLine();
+        
+            switch (op) {
+                case 1:
+                    System.out.print("Ingrese el código de la habitación: ");
+                    int c1 = scanner.nextInt();
+                    System.out.println(escapeHouse.mostrarHabitacion(c1));
+                    break;
+                case 2:
+                    System.out.print("Ingrese el código de la habitación: ");
+                    int c2 = scanner.nextInt();
+                    System.out.println(escapeHouse.habitacionesContiguas(c2));
+                    break;
+                case 3:
+                    System.out.print("Ingrese el código de la habitación de origen: ");
+                    int hO = scanner.nextInt();
+                    System.out.print("Ingrese el código de la habitación de destino: ");
+                    int hD = scanner.nextInt();
+                    System.out.print("Ingrese la cantidad de puntos: ");
+                    int k = scanner.nextInt();
+                    boolean sePuede = escapeHouse.esPosibleLlegar(hO, hD, k);
+                    if (sePuede) {
+                        System.out.println("Es posible llegar de la habitación " + hO + " a la habitación " + hD + " con " + k + " puntos.");
+                    } else {
+                        System.out.println("No es posible llegar de la habitación " + hO + " a la habitación " + hD + " con " + k + " puntos.");
+                    }
+                    break;
 
-            case 4:
+                case 4:
 
-                System.out.print("Ingrese el código de la habitación origen: ");
-                int hO2 = scanner.nextInt();
-                System.out.print("Ingrese el código de la habitación destino: ");
-                int hD2 = scanner.nextInt();
-                System.out.println((String) escapeHouse.minimoPuntaje(hO2, hD2));
-                break;
+                    System.out.print("Ingrese el código de la habitación origen: ");
+                    int hO2 = scanner.nextInt();
+                    System.out.print("Ingrese el código de la habitación destino: ");
+                    int hD2 = scanner.nextInt();
+                    System.out.println((String) escapeHouse.minimoPuntaje(hO2, hD2));
+                    break;
 
-            case 5:
-                System.out.print("Ingrese el código de la habitación origen: ");
-                int hO3 = scanner.nextInt();
-                System.out.print("Ingrese el código de la habitación destino: ");
-                int hD3 = scanner.nextInt();
-                System.out.print("Ingrese el código de la habitación a evitar: ");
-                int hEvitar = scanner.nextInt();
-                System.out.println("Ingrese la cantidad máxima de puntos: ");
-                int p = scanner.nextInt();
-                System.out.println((String) escapeHouse.sinPasarPor(hO3, hD3, hEvitar, p));
-                break;
-            case 0:
-                System.out.println("Volviendo al menú principal...");
-                break;
-            default:
-                System.out.println("Opción inválida. Intente nuevamente.");
-        }
+                case 5:
+                    System.out.print("Ingrese el código de la habitación origen: ");
+                    int hO3 = scanner.nextInt();
+                    System.out.print("Ingrese el código de la habitación destino: ");
+                    int hD3 = scanner.nextInt();
+                    System.out.print("Ingrese el código de la habitación a evitar: ");
+                    int hEvitar = scanner.nextInt();
+                    System.out.println("Ingrese la cantidad máxima de puntos: ");
+                    int p = scanner.nextInt();
+                    System.out.println((String) escapeHouse.sinPasarPor(hO3, hD3, hEvitar, p));
+                    break;
+                case 0:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+            }
+        } while (op != 0);
     
     }
 
@@ -449,55 +452,60 @@ public class Main {
         System.out.println("0. Volver");
         System.out.print("Seleccione: ");
 
-        int op = scanner.nextInt();
-        scanner.nextLine();
-        switch (op) {
-            case 1:
-                System.out.println("Ingrese el puntaje del desafío: ");
-                int pjeD = scanner.nextInt();
-                System.out.print("Ingrese el código de la habitación del desafío: ");
-                int codD = scanner.nextInt();
-                System.out.println((String)escapeHouse.mostrarDesafio(pjeD, codD));
-                break;
-            case 2:
-                System.out.println("Ingrese el nombre del equipo: ");
-                String nomEq = scanner.nextLine();
-                System.out.println((String)escapeHouse.mostrarDesafiosResueltos(nomEq));
-                break;
-            case 3:
-                System.out.println("Ingrese el nombre del equipo: ");
-                String nomEq3 = scanner.nextLine();
-                System.out.println("Ingrese el código de la habitación del desafío: ");
-                int codD3 = scanner.nextInt();
-                System.out.println("Ingrese el puntaje del desafío: ");
-                int pjeD3 = scanner.nextInt();
+        int op;
+        do {
+            op = scanner.nextInt();
+            scanner.nextLine();
+        
+            scanner.nextLine();
+            switch (op) {
+                case 1:
+                    System.out.println("Ingrese el puntaje del desafío: ");
+                    int pjeD = scanner.nextInt();
+                    System.out.print("Ingrese el código de la habitación del desafío: ");
+                    int codD = scanner.nextInt();
+                    System.out.println((String)escapeHouse.mostrarDesafio(pjeD, codD));
+                    break;
+                case 2:
+                    System.out.println("Ingrese el nombre del equipo: ");
+                    String nomEq = scanner.nextLine();
+                    System.out.println((String)escapeHouse.mostrarDesafiosResueltos(nomEq));
+                    break;
+                case 3:
+                    System.out.println("Ingrese el nombre del equipo: ");
+                    String nomEq3 = scanner.nextLine();
+                    System.out.println("Ingrese el código de la habitación del desafío: ");
+                    int codD3 = scanner.nextInt();
+                    System.out.println("Ingrese el puntaje del desafío: ");
+                    int pjeD3 = scanner.nextInt();
 
-                boolean resuelto = escapeHouse.verificarDesafioResuelto(nomEq3, pjeD3, codD3);
-                if (resuelto) {
-                    System.out.println("El equipo ha resuelto el desafío");
-                } else {
-                    System.out.println("El equipo no ha resuelto el desafío");
-                }
-                break;
-            case 4:
-                System.out.println("Ingrese el código de la habitación: ");
-                int codH4 = scanner.nextInt();
-                System.out.println("Ingrese el puntaje mínimo: ");
-                int pjeMin = scanner.nextInt();
-                System.out.println("Ingrese el puntaje máximo: ");
-                int pjeMax = scanner.nextInt();
-                System.out.println("Ingrese el tipo de desafío: ");
-                String tipoD4 = scanner.nextLine();
-                System.out.println(escapeHouse.mostrarDesafiosTipo(codH4, pjeMin, pjeMax, tipoD4));
+                    boolean resuelto = escapeHouse.verificarDesafioResuelto(nomEq3, pjeD3, codD3);
+                    if (resuelto) {
+                        System.out.println("El equipo ha resuelto el desafío");
+                    } else {
+                        System.out.println("El equipo no ha resuelto el desafío");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Ingrese el código de la habitación: ");
+                    int codH4 = scanner.nextInt();
+                    System.out.println("Ingrese el puntaje mínimo: ");
+                    int pjeMin = scanner.nextInt();
+                    System.out.println("Ingrese el puntaje máximo: ");
+                    int pjeMax = scanner.nextInt();
+                    System.out.println("Ingrese el tipo de desafío: ");
+                    String tipoD4 = scanner.nextLine();
+                    System.out.println(escapeHouse.mostrarDesafiosTipo(codH4, pjeMin, pjeMax, tipoD4));
 
-                break;
+                    break;
 
-            case 0:
-                System.out.println("Volviendo al menú principal...");
-                break;
-            default:
-                System.out.println("Opción inválida. Intente nuevamente.");
-        }
+                case 0:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+            }
+        } while (op != 0);
         
     }
 
@@ -511,10 +519,11 @@ public class Main {
         System.out.println("5. Verificar si un equipo puede salir del escape house");
         System.out.println("0. Volver");
         System.out.print("Seleccione: ");
-
-        int op = scanner.nextInt();
-        scanner.nextLine();
-        switch (op) {
+        int op;
+        do {
+            op = scanner.nextInt();
+            scanner.nextLine();
+            switch (op) {
             case 1:
                 System.out.println("Ingrese el nombre del equipo: ");
                 String nombreEquipo = scanner.nextLine();
@@ -539,8 +548,10 @@ public class Main {
                 boolean seResolvio = escapeHouse.jugarDesafio(nombreEquipo3, codigoHabitacionDesafio, puntajeDesafio);
                 if(seResolvio){
                     System.out.println("El desafio se resolvio correctamente");
+                    registrarEnLog("El equipo "+ nombreEquipo3 + " resolvió el desafío con puntaje " + puntajeDesafio + " de la habitación " + codigoHabitacionDesafio);
                 }else{
                     System.out.println("El desafio no se resolvio");
+                    registrarEnLog("El equipo "+ nombreEquipo3 + " no resolvió el desafío con puntaje " + puntajeDesafio + " de la habitación " + codigoHabitacionDesafio);
                 }
                 break;
 
@@ -552,20 +563,28 @@ public class Main {
                 boolean seCambio = escapeHouse.cambiarDeHabitacion(nombreEquipo4, codHabDestino);
                 if(seCambio){
                     System.out.println("El equipo se cambio de habitacion correctamente");
+                    registrarEnLog("El equipo " + nombreEquipo4 + " se cambió de habitación a " + codHabDestino);
                 }else{
                     System.out.println("El equipo no se pudo cambiar de habitacion");
+                    registrarEnLog("El equipo " + nombreEquipo4 + " no se cambió de habitación a " + codHabDestino);
                 }
                 break;
             case 5:
                 System.out.println("Ingrese el nombre del equipo: ");
                 String nombreEquipo5 = scanner.nextLine();
-                System.out.println(escapeHouse.puedeSalir(nombreEquipo5));
+                boolean puede = escapeHouse.puedeSalir(nombreEquipo5);
+                if (puede){
+                    System.out.println("El equipo "+ nombreEquipo5 + " puede salir");
+                }else{
+                    System.out.println("El equipo "+ nombreEquipo5 +" no puede salir");
+                }
                 break;
             case 0:
                 System.out.println("Volviendo al menú principal...");
                 break;
             default:
                 System.out.println("Opción inválida. Intente nuevamente.");
-        }
+            }
+        } while (op != 0);
     }
 }

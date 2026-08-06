@@ -1,26 +1,26 @@
 --- CARGA INICIAL FINALIZADA ---
 === Grafo (plano de la casa) ===
 
-Vertice: 23 [10,15;]
-Vertice: 22 [14,20;]
+Vertice: 23 [10,0;]
+Vertice: 22 [14,0;]
 Vertice: 20 [18,30;12,10;]
-Vertice: 18 [20,30;3,20;14,10;]
-Vertice: 16 [8,10;4,15;]
-Vertice: 15 [1,20;8,5;]
-Vertice: 14 [18,10;22,20;]
-Vertice: 13 [3,20;]
-Vertice: 12 [20,10;10,5;11,10;]
-Vertice: 11 [12,10;2,30;]
-Vertice: 10 [12,5;23,15;]
-Vertice: 9 [6,10;]
-Vertice: 8 [15,5;16,10;]
-Vertice: 7 [6,10;1,10;]
-Vertice: 6 [2,20;7,10;9,10;]
-Vertice: 5 [4,10;]
-Vertice: 4 [16,15;5,10;]
-Vertice: 3 [18,20;13,20;]
-Vertice: 2 [11,30;6,20;]
-Vertice: 1 [7,10;15,20;]
+Vertice: 18 [20,0;3,20;14,10;]
+Vertice: 16 [8,0;4,15;]
+Vertice: 15 [1,0;8,5;]
+Vertice: 14 [18,0;22,20;]
+Vertice: 13 [3,0;]
+Vertice: 12 [20,0;10,5;11,10;]
+Vertice: 11 [12,0;2,30;]
+Vertice: 10 [12,0;23,15;]
+Vertice: 9 [6,0;]
+Vertice: 8 [15,0;16,10;]
+Vertice: 7 [6,0;1,10;]
+Vertice: 6 [2,0;7,10;9,10;]
+Vertice: 5 [4,0;]
+Vertice: 4 [16,0;5,10;]
+Vertice: 3 [18,0;13,20;]
+Vertice: 2 [11,0;6,20;]
+Vertice: 1 [7,0;15,20;]
 === Habitaciones (AVL) ===
 Habitacion 8 - Nombre: Depósito - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false -> Altura: 4 -> HI: Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false HD: Habitacion 16 - Nombre: Lavadero - Planta: 1 - Superficie: 8.5m2 - Tiene salida: false
 Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false -> Altura: 2 -> HI: Habitacion 2 - Nombre: Baño - Planta: 1 - Superficie: 8.0m2 - Tiene salida: false HD: Habitacion 6 - Nombre: Cocina - Planta: 1 - Superficie: 18.0m2 - Tiene salida: false
@@ -45,56 +45,80 @@ Habitacion 23 - Nombre: Sala de Música - Planta: 2 - Superficie: 32.0m2 - Tiene
 
 === Desafios por habitacion ===
 Habitacion 1:
+Desafio: Resolver ecuacion Puntaje:10 Habitacion:1 Tipo: matematico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 2:
+Desafio: Pintar el error en el cuadro Puntaje:15 Habitacion:2 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 3:
+Desafio: Aprobar el parcial de Estructuras de Datos Puntaje:10 Habitacion:3 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 4:
+Desafio: Traducir el mensaje encriptado Puntaje:15 Habitacion:4 Tipo: letras -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 5:
+Desafio: Afinar la guitarra Puntaje:10 Habitacion:5 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 6:
 Desafio: Preparar cafe Puntaje:20 Habitacion:6 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 7:
 Desafio: Poner la mesa rapido Puntaje:10 Habitacion:7 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 8:
+Desafio: Ordenar el deposito Puntaje:10 Habitacion:8 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 9:
+Desafio: Construir torre de cartas Puntaje:10 Habitacion:9 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 10:
+Desafio: Llevar agua con una hoja de papel Puntaje:15 Habitacion:10 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 11:
+Desafio: Encontrar las diferencias entre fotos Puntaje:20 Habitacion:11 Tipo: busqueda -> Altura: 1 -> HI: Desafio: Evitar jaque mate Puntaje:10 Habitacion:11 Tipo: logico HD: N/A
+Desafio: Evitar jaque mate Puntaje:10 Habitacion:11 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 12:
+Desafio: Esquivar los escalones rotos Puntaje:10 Habitacion:12 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 13:
+Desafio: Hacer correr doom en un termometro digital Puntaje:20 Habitacion:13 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 14:
+Desafio: Encestar pelota Puntaje:20 Habitacion:14 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 15:
+Desafio: Identificar la planta venenosa Puntaje:20 Habitacion:15 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 16:
 Desafio: Armar rompecabezas Puntaje:15 Habitacion:16 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 18:
+Desafio: Resolver un perimetro Puntaje:15 Habitacion:18 Tipo: matematico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 20:
+Desafio: Descifrar el candado final Puntaje:15 Habitacion:20 Tipo: matematico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 22:
+Desafio: Reconocer el impostor Puntaje:20 Habitacion:22 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 23:
+Desafio: Lograr comunicarse a traves de un vidrio sin sonido Puntaje:15 Habitacion:23 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 
 === Equipos (Hash) ===
 {Los 4 Fantasticos=Equipo: Los 4 Fantasticos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Estructurados=Equipo: Estructurados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Otakus=Equipo: Otakus Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Cafeinados=Equipo: Cafeinados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Skidush=Equipo: Skidush Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Club del ajedrez=Equipo: Club del ajedrez Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de Linux=Equipo: Fanaticos de Linux Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, GrupoA=Equipo: GrupoA Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Los Compiladores=Equipo: Los Compiladores Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de los panchos=Equipo: Fanaticos de los panchos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0}
 === Desafios resueltos por equipo (Hash) ===
 {Los 4 Fantasticos=[  ], Estructurados=[  ], Otakus=[  ], Cafeinados=[  ], Skidush=[  ], Club del ajedrez=[  ], Fanaticos de Linux=[  ], GrupoA=[  ], Los Compiladores=[  ], Fanaticos de los panchos=[  ]}
+Puerta agregada: 6 -> 11
+Error al agregar la puerta: 6 -> 2
+Habitación modificada: 6, casa
+Error al eliminar la habitación: 6
+Error al eliminar la habitación: 20
+Se agregó la habitación: 33, akopsd
 --- CARGA INICIAL FINALIZADA ---
 === Grafo (plano de la casa) ===
 
-Vertice: 23 [10,15;]
-Vertice: 22 [14,20;]
+Vertice: 23 [10,0;]
+Vertice: 22 [14,0;]
 Vertice: 20 [18,30;12,10;]
-Vertice: 18 [20,30;3,20;14,10;]
-Vertice: 16 [8,10;4,15;]
-Vertice: 15 [1,20;8,5;]
-Vertice: 14 [18,10;22,20;]
-Vertice: 13 [3,20;]
-Vertice: 12 [20,10;10,5;11,10;]
-Vertice: 11 [12,10;2,30;]
-Vertice: 10 [12,5;23,15;]
-Vertice: 9 [6,10;]
-Vertice: 8 [15,5;16,10;]
-Vertice: 7 [6,10;1,10;]
-Vertice: 6 [2,20;7,10;9,10;]
-Vertice: 5 [4,10;]
-Vertice: 4 [16,15;5,10;]
-Vertice: 3 [18,20;13,20;]
-Vertice: 2 [11,30;6,20;]
-Vertice: 1 [7,10;15,20;]
+Vertice: 18 [20,0;3,20;14,10;]
+Vertice: 16 [8,0;4,15;]
+Vertice: 15 [1,0;8,5;]
+Vertice: 14 [18,0;22,20;]
+Vertice: 13 [3,0;]
+Vertice: 12 [20,0;10,5;11,10;]
+Vertice: 11 [12,0;2,30;]
+Vertice: 10 [12,0;23,15;]
+Vertice: 9 [6,0;]
+Vertice: 8 [15,0;16,10;]
+Vertice: 7 [6,0;1,10;]
+Vertice: 6 [2,0;7,10;9,10;]
+Vertice: 5 [4,0;]
+Vertice: 4 [16,0;5,10;]
+Vertice: 3 [18,0;13,20;]
+Vertice: 2 [11,0;6,20;]
+Vertice: 1 [7,0;15,20;]
 === Habitaciones (AVL) ===
 Habitacion 8 - Nombre: Depósito - Planta: 1 - Superficie: 10.0m2 - Tiene salida: false -> Altura: 4 -> HI: Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false HD: Habitacion 16 - Nombre: Lavadero - Planta: 1 - Superficie: 8.5m2 - Tiene salida: false
 Habitacion 4 - Nombre: Bodega - Planta: 0 - Superficie: 20.0m2 - Tiene salida: false -> Altura: 2 -> HI: Habitacion 2 - Nombre: Baño - Planta: 1 - Superficie: 8.0m2 - Tiene salida: false HD: Habitacion 6 - Nombre: Cocina - Planta: 1 - Superficie: 18.0m2 - Tiene salida: false
@@ -119,30 +143,49 @@ Habitacion 23 - Nombre: Sala de Música - Planta: 2 - Superficie: 32.0m2 - Tiene
 
 === Desafios por habitacion ===
 Habitacion 1:
+Desafio: Resolver ecuacion Puntaje:10 Habitacion:1 Tipo: matematico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 2:
+Desafio: Pintar el error en el cuadro Puntaje:15 Habitacion:2 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 3:
+Desafio: Aprobar el parcial de Estructuras de Datos Puntaje:10 Habitacion:3 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 4:
+Desafio: Traducir el mensaje encriptado Puntaje:15 Habitacion:4 Tipo: letras -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 5:
+Desafio: Afinar la guitarra Puntaje:10 Habitacion:5 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 6:
 Desafio: Preparar cafe Puntaje:20 Habitacion:6 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 7:
 Desafio: Poner la mesa rapido Puntaje:10 Habitacion:7 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 8:
+Desafio: Ordenar el deposito Puntaje:10 Habitacion:8 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 9:
+Desafio: Construir torre de cartas Puntaje:10 Habitacion:9 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 10:
+Desafio: Llevar agua con una hoja de papel Puntaje:15 Habitacion:10 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 11:
+Desafio: Encontrar las diferencias entre fotos Puntaje:20 Habitacion:11 Tipo: busqueda -> Altura: 1 -> HI: Desafio: Evitar jaque mate Puntaje:10 Habitacion:11 Tipo: logico HD: N/A
+Desafio: Evitar jaque mate Puntaje:10 Habitacion:11 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 12:
+Desafio: Esquivar los escalones rotos Puntaje:10 Habitacion:12 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 13:
+Desafio: Hacer correr doom en un termometro digital Puntaje:20 Habitacion:13 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 14:
+Desafio: Encestar pelota Puntaje:20 Habitacion:14 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 15:
+Desafio: Identificar la planta venenosa Puntaje:20 Habitacion:15 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 16:
 Desafio: Armar rompecabezas Puntaje:15 Habitacion:16 Tipo: destreza -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 18:
+Desafio: Resolver un perimetro Puntaje:15 Habitacion:18 Tipo: matematico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 20:
+Desafio: Descifrar el candado final Puntaje:15 Habitacion:20 Tipo: matematico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 22:
+Desafio: Reconocer el impostor Puntaje:20 Habitacion:22 Tipo: logico -> Altura: 0 -> HI: N/A HD: N/A
 Habitacion 23:
+Desafio: Lograr comunicarse a traves de un vidrio sin sonido Puntaje:15 Habitacion:23 Tipo: ingenio -> Altura: 0 -> HI: N/A HD: N/A
 
 === Equipos (Hash) ===
 {Los 4 Fantasticos=Equipo: Los 4 Fantasticos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Estructurados=Equipo: Estructurados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Otakus=Equipo: Otakus Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Cafeinados=Equipo: Cafeinados Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Skidush=Equipo: Skidush Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Club del ajedrez=Equipo: Club del ajedrez Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de Linux=Equipo: Fanaticos de Linux Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, GrupoA=Equipo: GrupoA Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Los Compiladores=Equipo: Los Compiladores Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0, Fanaticos de los panchos=Equipo: Fanaticos de los panchos Puntaje exigido: 150 Puntaje total: 0 Habitacion actual:6 Puntaje en habitacion: 0}
 === Desafios resueltos por equipo (Hash) ===
 {Los 4 Fantasticos=[  ], Estructurados=[  ], Otakus=[  ], Cafeinados=[  ], Skidush=[  ], Club del ajedrez=[  ], Fanaticos de Linux=[  ], GrupoA=[  ], Los Compiladores=[  ], Fanaticos de los panchos=[  ]}
+Equipo modificado: Otakus
